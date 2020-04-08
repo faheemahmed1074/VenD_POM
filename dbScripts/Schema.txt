@@ -1,0 +1,1015 @@
+-- Drop table
+
+-- DROP TABLE public."SequelizeData";
+
+CREATE TABLE "SequelizeData" (
+	"name" varchar(255) NOT NULL,
+	CONSTRAINT "SequelizeData_pkey" PRIMARY KEY (name)
+);
+
+-- Drop table
+
+-- DROP TABLE public."SequelizeMeta";
+
+CREATE TABLE "SequelizeMeta" (
+	"name" varchar(255) NOT NULL,
+	CONSTRAINT "SequelizeMeta_pkey" PRIMARY KEY (name)
+);
+
+-- Drop table
+
+-- DROP TABLE public.arch_peris;
+
+CREATE TABLE arch_peris (
+	id serial NOT NULL,
+	"name" varchar(255) NULL,
+	unit varchar(255) NULL,
+	description varchar(255) NULL,
+	identifier varchar(255) NULL,
+	arch_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	role_type int4 NULL DEFAULT 1,
+	chip_id int4 NULL,
+	CONSTRAINT arch_peris_pkey PRIMARY KEY (id),
+	CONSTRAINT arch_peris_arch_id_fkey FOREIGN KEY (arch_id) REFERENCES arches(id),
+	CONSTRAINT arch_peris_chip_id_fkey FOREIGN KEY (chip_id) REFERENCES chips(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.arch_tile_sizes;
+
+CREATE TABLE arch_tile_sizes (
+	id serial NOT NULL,
+	"rows" float8 NULL DEFAULT 0,
+	"columns" float8 NULL DEFAULT 0,
+	arch_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	die_x float8 NULL,
+	die_y float8 NULL,
+	CONSTRAINT arch_tile_sizes_pkey PRIMARY KEY (id),
+	CONSTRAINT arch_tile_sizes_arch_id_fkey FOREIGN KEY (arch_id) REFERENCES arches(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.arch_tiles;
+
+CREATE TABLE arch_tiles (
+	id serial NOT NULL,
+	netname varchar(255) NULL DEFAULT NULL::character varying,
+	arch_id int4 NULL,
+	"row" int4 NULL,
+	col int4 NULL,
+	"type" varchar(255) NULL DEFAULT NULL::character varying,
+	pnum varchar(255) NULL DEFAULT NULL::character varying,
+	t varchar(255) NULL DEFAULT NULL::character varying,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT arch_tiles_pkey PRIMARY KEY (id),
+	CONSTRAINT arch_tiles_arch_id_fkey FOREIGN KEY (arch_id) REFERENCES arches(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.arches;
+
+CREATE TABLE arches (
+	id serial NOT NULL,
+	"name" varchar(255) NOT NULL,
+	description text NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	digital bool NULL,
+	enabled bool NULL,
+	rowbit int4 NULL,
+	c2t_e float8 NULL,
+	c2b_e float8 NULL,
+	c2l_e float8 NULL,
+	c2r_e float8 NULL,
+	c2t_w float8 NULL,
+	c2b_w float8 NULL,
+	c2l_w float8 NULL,
+	c2r_w float8 NULL,
+	c2c float8 NULL,
+	otg_b int4 NULL,
+	CONSTRAINT arches_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.bonpad_rb;
+
+CREATE TABLE bonpad_rb (
+	id serial NOT NULL,
+	bonpad_id int4 NULL,
+	rowbit int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT bonpad_rb_pkey PRIMARY KEY (id),
+	CONSTRAINT bonpad_rb_bonpad_id_fkey FOREIGN KEY (bonpad_id) REFERENCES bonpads(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.bonpads;
+
+CREATE TABLE bonpads (
+	id serial NOT NULL,
+	arch_id int4 NULL,
+	pnum varchar(255) NULL,
+	"row" int4 NULL,
+	"column" int4 NULL,
+	side enum_bonpads_side NULL DEFAULT 'L'::enum_bonpads_side,
+	"name" varchar(255) NULL,
+	cen_x float8 NULL DEFAULT 0,
+	cen_y float8 NULL DEFAULT 0,
+	width float8 NULL DEFAULT 0,
+	height float8 NULL DEFAULT 0,
+	area float8 NULL DEFAULT 0,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	cid varchar(255) NULL,
+	lt varchar(255) NULL,
+	old_name varchar(255) NULL,
+	CONSTRAINT bonpads_pkey PRIMARY KEY (id),
+	CONSTRAINT bonpads_arch_id_fkey FOREIGN KEY (arch_id) REFERENCES arches(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.categories;
+
+CREATE TABLE categories (
+	id serial NOT NULL,
+	identifier varchar(255) NOT NULL,
+	category varchar(255) NOT NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT categories_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.category_to_sub_mappings;
+
+CREATE TABLE category_to_sub_mappings (
+	id serial NOT NULL,
+	category_id int4 NULL,
+	sub_category_id int4 NULL,
+	CONSTRAINT category_to_sub_mappings_pkey PRIMARY KEY (id),
+	CONSTRAINT category_to_sub_mappings_category_id_fkey FOREIGN KEY (category_id) REFERENCES categories(id),
+	CONSTRAINT category_to_sub_mappings_sub_category_id_fkey FOREIGN KEY (sub_category_id) REFERENCES categories(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.chip_bumps;
+
+CREATE TABLE chip_bumps (
+	id serial NOT NULL,
+	pin int4 NULL,
+	pnum varchar(255) NOT NULL,
+	pname varchar(255) NOT NULL,
+	sigt varchar(255) NOT NULL,
+	io_mech varchar(255) NOT NULL,
+	diameter_mm numeric(10,5) NULL,
+	x_pos_mm numeric(10,5) NULL,
+	y_pos_mm numeric(10,5) NULL,
+	chip_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	"RDL" bool NULL,
+	"BYP" bool NULL,
+	"HCD" float8 NULL,
+	"HF" float8 NULL,
+	"HV" float8 NULL,
+	"MCUgnd" bool NULL,
+	"RAS" bool NULL,
+	"VSW" bool NULL,
+	side varchar(255) NULL,
+	CONSTRAINT chip_bumps_pkey PRIMARY KEY (id),
+	CONSTRAINT chip_bumps_chip_id_fkey FOREIGN KEY (chip_id) REFERENCES chips(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.chip_category_maps;
+
+CREATE TABLE chip_category_maps (
+	id serial NOT NULL,
+	chip_id int4 NULL,
+	category_map_id int4 NULL,
+	CONSTRAINT chip_category_maps_pkey PRIMARY KEY (id),
+	CONSTRAINT category_map_id_foreign_idx FOREIGN KEY (category_map_id) REFERENCES category_to_sub_mappings(id),
+	CONSTRAINT chip_category_maps_chip_id_fkey FOREIGN KEY (chip_id) REFERENCES chips(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.chip_cert_vals;
+
+CREATE TABLE chip_cert_vals (
+	id serial NOT NULL,
+	chip_id int4 NULL,
+	chip_cert_id int4 NULL,
+	value bool NOT NULL,
+	updated_by varchar(255) NULL,
+	updated_date timestamptz NULL,
+	CONSTRAINT chip_cert_vals_pkey PRIMARY KEY (id),
+	CONSTRAINT chip_cert_vals_chip_cert_id_fkey FOREIGN KEY (chip_cert_id) REFERENCES chip_certs(id),
+	CONSTRAINT chip_cert_vals_chip_id_fkey FOREIGN KEY (chip_id) REFERENCES chips(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.chip_certs;
+
+CREATE TABLE chip_certs (
+	id serial NOT NULL,
+	"name" varchar(255) NOT NULL,
+	CONSTRAINT chip_certs_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.chip_share;
+
+CREATE TABLE chip_share (
+	id serial NOT NULL,
+	chip_id int4 NULL,
+	group_id int4 NULL,
+	account_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT chip_share_pkey PRIMARY KEY (id),
+	CONSTRAINT chip_share_chip_id_fkey FOREIGN KEY (chip_id) REFERENCES chips(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.chips;
+
+CREATE TABLE chips (
+	id serial NOT NULL,
+	x_dim_mm numeric(10,5) NULL,
+	y_dim_mm numeric(10,5) NULL,
+	z_dim_mm numeric(10,5) NULL,
+	company varchar(255) NOT NULL,
+	mpn varchar(255) NOT NULL,
+	cid varchar(255) NOT NULL,
+	num_balls int4 NOT NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	qualified_sys bool NULL DEFAULT true,
+	last_qualified_sys timestamptz NULL DEFAULT now(),
+	last_qualified_sys_by varchar(255) NULL DEFAULT NULL::character varying,
+	qualified_fw bool NULL DEFAULT true,
+	last_qualified_fw timestamptz NULL DEFAULT now(),
+	last_qualified_fw_by varchar(255) NULL DEFAULT NULL::character varying,
+	deleted bool NULL DEFAULT false,
+	last_deleted timestamptz NULL,
+	last_deleted_by varchar(255) NULL DEFAULT NULL::character varying,
+	status enum_chips_status NULL DEFAULT 'suggested'::enum_chips_status,
+	"release" enum_chips_release NULL,
+	created_by varchar(255) NULL DEFAULT NULL::character varying,
+	datasheet_url varchar(255) NULL,
+	url varchar(255) NULL,
+	last_updated_by varchar(255) NULL,
+	description text NULL,
+	share_status varchar(255) NULL DEFAULT 'public'::character varying,
+	account_id int4 NULL DEFAULT 1,
+	CONSTRAINT chips_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.devices;
+
+CREATE TABLE devices (
+	id serial NOT NULL,
+	width float4 NOT NULL,
+	height float4 NOT NULL,
+	title varchar(255) NOT NULL,
+	"type" varchar(255) NOT NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT devices_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.feedbacks;
+
+CREATE TABLE feedbacks (
+	id serial NOT NULL,
+	subject varchar(255) NULL,
+	"type" varchar(255) NULL,
+	description text NULL,
+	download_files_link varchar(255) NULL,
+	created_by varchar(255) NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT feedbacks_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.last_sys;
+
+CREATE TABLE last_sys (
+	id serial NOT NULL,
+	sys_id int4 NULL,
+	user_id varchar(255) NULL,
+	last_updated timestamptz NULL,
+	CONSTRAINT last_sys_pkey PRIMARY KEY (id),
+	CONSTRAINT last_sys_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.net_ios;
+
+CREATE TABLE net_ios (
+	id serial NOT NULL,
+	net_id int4 NULL,
+	pnum varchar(255) NULL,
+	driver int4 NULL DEFAULT 0,
+	ubumpid int4 NULL,
+	bump_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	sys_chip_id int4 NULL,
+	rdir varchar(255) NULL,
+	rval float8 NULL,
+	bondpad_id int4 NULL,
+	arch_tile_id int4 NULL,
+	series_net_id int4 NULL,
+	zcad_ubumpid varchar(255) NULL,
+	port_net_io_id int4 NULL,
+	pname varchar(255) NULL,
+	value varchar(255) NULL,
+	otg_m_row int4 NULL,
+	otg_m_col int4 NULL,
+	"type" varchar(255) NULL,
+	CONSTRAINT net_ios_pkey PRIMARY KEY (id),
+	CONSTRAINT net_ios_arch_tile_id_fkey FOREIGN KEY (arch_tile_id) REFERENCES arch_tiles(id),
+	CONSTRAINT net_ios_bondpad_id_fkey FOREIGN KEY (bondpad_id) REFERENCES bonpads(id),
+	CONSTRAINT net_ios_bump_id_fkey FOREIGN KEY (bump_id) REFERENCES chip_bumps(id),
+	CONSTRAINT net_ios_net_id_fkey FOREIGN KEY (net_id) REFERENCES nets(id),
+	CONSTRAINT net_ios_port_net_io_id_fkey FOREIGN KEY (port_net_io_id) REFERENCES net_ios(id) ON DELETE SET NULL,
+	CONSTRAINT net_ios_series_net_id_fkey FOREIGN KEY (series_net_id) REFERENCES nets(id),
+	CONSTRAINT sys_chip_id_foreign_idx FOREIGN KEY (sys_chip_id) REFERENCES sys_chips(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.nets;
+
+CREATE TABLE nets (
+	id serial NOT NULL,
+	netname varchar(255) NULL,
+	rpriority int4 NULL DEFAULT 0,
+	"type" varchar(255) NULL,
+	sys_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	col int4 NULL,
+	bondpad_id int4 NULL,
+	value varchar(255) NULL,
+	route varchar(255) NULL,
+	rdl_net_io_id int4 NULL,
+	preset bool NOT NULL DEFAULT false,
+	CONSTRAINT nets_pkey PRIMARY KEY (id),
+	CONSTRAINT nets_bondpad_id_fkey FOREIGN KEY (bondpad_id) REFERENCES bonpads(id),
+	CONSTRAINT nets_rdl_net_io_id_fkey FOREIGN KEY (rdl_net_io_id) REFERENCES net_ios(id) ON DELETE CASCADE,
+	CONSTRAINT nets_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.nets_bondpads;
+
+CREATE TABLE nets_bondpads (
+	id serial NOT NULL,
+	net_id int4 NOT NULL,
+	bondpad_id int4 NOT NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT nets_bondpads_pkey PRIMARY KEY (id),
+	CONSTRAINT nets_bondpads_bondpad_id_fkey FOREIGN KEY (bondpad_id) REFERENCES bonpads(id) ON DELETE CASCADE,
+	CONSTRAINT nets_bondpads_net_id_fkey FOREIGN KEY (net_id) REFERENCES nets(id) ON DELETE CASCADE
+);
+
+-- Drop table
+
+-- DROP TABLE public.package_balls;
+
+CREATE TABLE package_balls (
+	id serial NOT NULL,
+	package_id int4 NULL,
+	"row" varchar(255) NULL,
+	col varchar(255) NULL,
+	"name" varchar(255) NULL,
+	cen_x float8 NULL DEFAULT 0,
+	cen_y float8 NULL DEFAULT 0,
+	width float8 NULL DEFAULT 0,
+	height float8 NULL DEFAULT 0,
+	shape varchar(255) NULL DEFAULT 'rect'::character varying,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT package_balls_pkey PRIMARY KEY (id),
+	CONSTRAINT package_balls_package_id_fkey FOREIGN KEY (package_id) REFERENCES packages(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.package_pins;
+
+CREATE TABLE package_pins (
+	id serial NOT NULL,
+	pnum varchar(255) NULL DEFAULT NULL::character varying,
+	"name" varchar(255) NULL,
+	x float8 NULL,
+	y float8 NULL,
+	width float8 NULL,
+	height float8 NULL,
+	area float8 NULL,
+	package_id int4 NULL,
+	side enum_package_pins_side NULL DEFAULT 'left'::enum_package_pins_side,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	package_pnum varchar(255) NULL DEFAULT NULL::character varying,
+	"degree" varchar(255) NULL,
+	shape varchar(255) NULL DEFAULT 'rect'::character varying,
+	pin_num varchar(255) NULL,
+	CONSTRAINT package_pins_pkey PRIMARY KEY (id),
+	CONSTRAINT package_pins_package_id_fkey FOREIGN KEY (package_id) REFERENCES packages(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.packages;
+
+CREATE TABLE packages (
+	id serial NOT NULL,
+	"name" varchar(255) NULL DEFAULT ''::character varying,
+	d2e float8 NULL DEFAULT 0,
+	arch_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT packages_pkey PRIMARY KEY (id),
+	CONSTRAINT packages_arch_id_fkey FOREIGN KEY (arch_id) REFERENCES arches(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.rdlmask_chip;
+
+CREATE TABLE rdlmask_chip (
+	id serial NOT NULL,
+	rdlmask_id int4 NULL,
+	chip_id int4 NULL,
+	x int4 NULL,
+	y int4 NULL,
+	rot int4 NULL,
+	mcu bool NULL DEFAULT false,
+	CONSTRAINT rdlmask_chip_pkey PRIMARY KEY (id),
+	CONSTRAINT rdlmask_chip_chip_id_fkey FOREIGN KEY (chip_id) REFERENCES chips(id),
+	CONSTRAINT rdlmask_chip_rdlmask_id_fkey FOREIGN KEY (rdlmask_id) REFERENCES rdlmasks(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.rdlmask_chip_io;
+
+CREATE TABLE rdlmask_chip_io (
+	id serial NOT NULL,
+	rdlmask_chip_id int4 NULL,
+	pnum varchar(255) NULL,
+	"name" varchar(255) NULL,
+	"type" varchar(255) NULL,
+	CONSTRAINT rdlmask_chip_io_pkey PRIMARY KEY (id),
+	CONSTRAINT rdlmask_chip_io_rdlmask_chip_id_fkey FOREIGN KEY (rdlmask_chip_id) REFERENCES rdlmask_chip(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.rdlmask_maps;
+
+CREATE TABLE rdlmask_maps (
+	id serial NOT NULL,
+	tile_id int4 NULL,
+	"row" int4 NULL,
+	col int4 NULL,
+	pnum varchar(255) NULL,
+	rdlmask_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT rdlmask_maps_pkey PRIMARY KEY (id),
+	CONSTRAINT rdlmask_maps_rdlmask_id_fkey FOREIGN KEY (rdlmask_id) REFERENCES rdlmasks(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.rdlmask_package;
+
+CREATE TABLE rdlmask_package (
+	id serial NOT NULL,
+	rdlmask_id int4 NULL,
+	package_id int4 NULL,
+	io_qty int4 NULL,
+	CONSTRAINT rdlmask_package_pkey PRIMARY KEY (id),
+	CONSTRAINT rdlmask_package_package_id_fkey FOREIGN KEY (package_id) REFERENCES packages(id),
+	CONSTRAINT rdlmask_package_rdlmask_id_fkey FOREIGN KEY (rdlmask_id) REFERENCES rdlmasks(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.rdlmask_package_io;
+
+CREATE TABLE rdlmask_package_io (
+	id serial NOT NULL,
+	rdlmask_package_id int4 NULL,
+	bondpad_id int4 NULL,
+	netname varchar(255) NULL,
+	side varchar(255) NULL,
+	"row" int4 NULL,
+	col int4 NULL,
+	CONSTRAINT rdlmask_package_io_pkey PRIMARY KEY (id),
+	CONSTRAINT rdlmask_package_io_bondpad_id_fkey FOREIGN KEY (bondpad_id) REFERENCES bonpads(id),
+	CONSTRAINT rdlmask_package_io_rdlmask_package_id_fkey FOREIGN KEY (rdlmask_package_id) REFERENCES rdlmask_package(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.rdlmasks;
+
+CREATE TABLE rdlmasks (
+	id serial NOT NULL,
+	"name" varchar(255) NULL,
+	arch_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT rdlmasks_pkey PRIMARY KEY (id),
+	CONSTRAINT rdlmasks_arch_id_fkey FOREIGN KEY (arch_id) REFERENCES arches(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.resistors;
+
+CREATE TABLE resistors (
+	id serial NOT NULL,
+	"name" varchar(255) NULL,
+	x_dim_mm float4 NULL,
+	y_dim_mm float4 NULL,
+	value float4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT resistors_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys;
+
+CREATE TABLE sys (
+	id serial NOT NULL,
+	"name" varchar(255) NOT NULL,
+	description varchar(255) NOT NULL,
+	arch_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	arch_tile_id int4 NULL,
+	is_active bool NULL DEFAULT true,
+	"shouldSnap" bool NULL DEFAULT true,
+	status_id int4 NULL,
+	created_by varchar(255) NOT NULL,
+	zcad_system_id int4 NULL,
+	auto_rowmux bool NULL DEFAULT true,
+	c2t_e float8 NULL DEFAULT 0,
+	c2b_e float8 NULL DEFAULT 0,
+	c2l_e float8 NULL DEFAULT 0,
+	c2r_e float8 NULL DEFAULT 0,
+	c2c float8 NULL DEFAULT 0,
+	is_locked bool NULL DEFAULT false,
+	account_id int4 NULL,
+	"release" varchar(255) NULL DEFAULT 'Beta'::character varying,
+	route_status varchar(255) NULL DEFAULT 'UNROUTED'::character varying,
+	enabled_margin bool NULL DEFAULT false,
+	parent_id int4 NULL,
+	ult varchar(255) NULL,
+	design varchar(255) NULL DEFAULT 'new'::character varying,
+	last_placed timestamptz NULL,
+	last_placed_by varchar(255) NULL,
+	last_routed timestamptz NULL,
+	last_routed_by varchar(255) NULL,
+	last_schematic_changed timestamptz NULL,
+	last_schematic_changed_by varchar(255) NULL,
+	submitted_on timestamptz NULL,
+	submitted_by varchar(255) NULL,
+	package_id int4 NULL,
+	rdl_mask bool NOT NULL DEFAULT false,
+	CONSTRAINT sys_pkey PRIMARY KEY (id),
+	CONSTRAINT arch_tile_id_foreign_idx FOREIGN KEY (arch_tile_id) REFERENCES arch_tile_sizes(id),
+	CONSTRAINT sys_arch_id_fkey FOREIGN KEY (arch_id) REFERENCES arches(id),
+	CONSTRAINT sys_package_id_fkey FOREIGN KEY (package_id) REFERENCES packages(id),
+	CONSTRAINT sys_parent_id_fkey FOREIGN KEY (parent_id) REFERENCES sys(id) ON DELETE SET NULL,
+	CONSTRAINT sys_status_id_fkey FOREIGN KEY (status_id) REFERENCES sys_statuses(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_cfg_boost;
+
+CREATE TABLE sys_cfg_boost (
+	id serial NOT NULL,
+	sys_id int4 NOT NULL,
+	"index" int4 NOT NULL,
+	current_limit varchar(255) NULL,
+	vout varchar(255) NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_cfg_boost_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_cfg_boost_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id) ON DELETE CASCADE
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_cfg_gpio;
+
+CREATE TABLE sys_cfg_gpio (
+	id serial NOT NULL,
+	sys_id int4 NOT NULL,
+	pin int4 NOT NULL,
+	port int4 NULL,
+	"level" varchar(255) NULL,
+	"function" varchar(255) NULL,
+	config varchar(255) NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_cfg_gpio_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_cfg_gpio_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id) ON DELETE CASCADE
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_cfg_ldo;
+
+CREATE TABLE sys_cfg_ldo (
+	id serial NOT NULL,
+	sys_id int4 NOT NULL,
+	"index" int4 NOT NULL,
+	bypass varchar(255) NULL,
+	current_limit varchar(255) NULL,
+	enabled varchar(255) NULL,
+	vout varchar(255) NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_cfg_ldo_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_cfg_ldo_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id) ON DELETE CASCADE
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_cfg_led;
+
+CREATE TABLE sys_cfg_led (
+	id serial NOT NULL,
+	sys_id int4 NOT NULL,
+	"index" int4 NOT NULL,
+	duty_cyc float8 NULL,
+	"period" float8 NULL,
+	intensity varchar(255) NULL,
+	brightness int4 NULL,
+	invert_pwm int4 NULL,
+	led_mask int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_cfg_led_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_cfg_led_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id) ON DELETE CASCADE
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_cfg_lt;
+
+CREATE TABLE sys_cfg_lt (
+	id serial NOT NULL,
+	sys_id int4 NOT NULL,
+	pname varchar(255) NULL,
+	vin varchar(255) NULL,
+	vout varchar(255) NULL,
+	"mode" varchar(255) NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_cfg_lt_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_cfg_lt_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id) ON DELETE CASCADE
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_cfg_sysldo;
+
+CREATE TABLE sys_cfg_sysldo (
+	id serial NOT NULL,
+	sys_id int4 NOT NULL,
+	bypass varchar(255) NULL,
+	current_limit varchar(255) NULL,
+	vout varchar(255) NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_cfg_sysldo_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_cfg_sysldo_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id) ON DELETE CASCADE
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_chips;
+
+CREATE TABLE sys_chips (
+	id serial NOT NULL,
+	x int4 NULL,
+	y int4 NULL,
+	rot int4 NULL,
+	sys_id int4 NULL,
+	cid int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	s_x int4 NULL,
+	s_y int4 NULL,
+	"type" varchar(255) NULL,
+	is_shown_to_developer bool NULL,
+	t_x int4 NULL,
+	t_y int4 NULL,
+	rdl_snaped bool NOT NULL DEFAULT false,
+	CONSTRAINT sys_chips_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_chips_chip_id_fkey FOREIGN KEY (cid) REFERENCES chips(id),
+	CONSTRAINT sys_chips_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_devices;
+
+CREATE TABLE sys_devices (
+	id serial NOT NULL,
+	x float4 NOT NULL,
+	y float4 NOT NULL,
+	"isVertical" bool NULL DEFAULT false,
+	sys_id int4 NULL,
+	device_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	"holderId" int4 NULL,
+	CONSTRAINT sys_devices_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_devices_device_id_fkey FOREIGN KEY (device_id) REFERENCES devices(id),
+	CONSTRAINT sys_devices_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_digital_routes;
+
+CREATE TABLE sys_digital_routes (
+	id serial NOT NULL,
+	netname varchar(255) NULL,
+	dest_row int4 NULL,
+	dest_col int4 NULL,
+	src_row int4 NULL,
+	src_col int4 NULL,
+	"path" jsonb NULL,
+	sys_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_digital_routes_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_digital_routes_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_issues;
+
+CREATE TABLE sys_issues (
+	id serial NOT NULL,
+	"level" varchar(255) NULL,
+	"type" varchar(255) NULL,
+	message varchar(255) NULL,
+	sys_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_issues_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_issues_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_nets;
+
+CREATE TABLE sys_nets (
+	id serial NOT NULL,
+	"row" int4 NOT NULL,
+	col int4 NOT NULL,
+	chip_id int4 NULL,
+	bump_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	gridcode varchar(255) NULL,
+	arch_tile_id int4 NULL,
+	CONSTRAINT sys_nets_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_nets_arch_tile_id_fkey FOREIGN KEY (arch_tile_id) REFERENCES arch_tiles(id),
+	CONSTRAINT sys_nets_bump_id_fkey FOREIGN KEY (bump_id) REFERENCES chip_bumps(id),
+	CONSTRAINT sys_nets_chip_id_fkey FOREIGN KEY (chip_id) REFERENCES sys_chips(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_package_pin_bp;
+
+CREATE TABLE sys_package_pin_bp (
+	id serial NOT NULL,
+	sys_package_pin_id int4 NULL,
+	bonpad_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_package_pin_bp_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_package_pin_bp_bonpad_id_fkey FOREIGN KEY (bonpad_id) REFERENCES bonpads(id),
+	CONSTRAINT sys_package_pin_bp_sys_package_pin_id_fkey FOREIGN KEY (sys_package_pin_id) REFERENCES sys_package_pins(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_package_pins;
+
+CREATE TABLE sys_package_pins (
+	id serial NOT NULL,
+	"name" varchar(255) NULL,
+	sys_package_id int4 NULL,
+	package_pin_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_package_pins_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_package_pins_package_pin_id_fkey FOREIGN KEY (package_pin_id) REFERENCES package_pins(id),
+	CONSTRAINT sys_package_pins_sys_package_id_fkey FOREIGN KEY (sys_package_id) REFERENCES sys_packages(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_packages;
+
+CREATE TABLE sys_packages (
+	id serial NOT NULL,
+	sys_id int4 NULL,
+	package_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_packages_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_packages_package_id_fkey FOREIGN KEY (package_id) REFERENCES packages(id),
+	CONSTRAINT sys_packages_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_peris;
+
+CREATE TABLE sys_peris (
+	id serial NOT NULL,
+	sys_id int4 NULL,
+	peri_id int4 NULL,
+	value float8 NULL,
+	quantity int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_peris_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_peris_peri_id_fkey FOREIGN KEY (peri_id) REFERENCES arch_peris(id),
+	CONSTRAINT sys_peris_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_resistors;
+
+CREATE TABLE sys_resistors (
+	id serial NOT NULL,
+	dx float4 NULL,
+	dy float4 NULL,
+	"name" varchar(255) NULL,
+	value float8 NULL,
+	sys_id int4 NULL,
+	resistor_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_resistors_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_resistors_resistor_id_fkey FOREIGN KEY (resistor_id) REFERENCES resistors(id),
+	CONSTRAINT sys_resistors_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_routes;
+
+CREATE TABLE sys_routes (
+	id serial NOT NULL,
+	netname varchar(255) NULL,
+	x1 int4 NULL,
+	y1 int4 NULL,
+	x2 int4 NULL,
+	y2 int4 NULL,
+	"row" int4 NULL,
+	col int4 NULL,
+	rowbit int4 NULL,
+	sys_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_routes_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_routes_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_share;
+
+CREATE TABLE sys_share (
+	id serial NOT NULL,
+	sys_id int4 NULL,
+	group_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_share_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_statuses;
+
+CREATE TABLE sys_statuses (
+	id serial NOT NULL,
+	"name" varchar(255) NULL,
+	identifier varchar(255) NULL,
+	CONSTRAINT sys_statuses_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_tiles;
+
+CREATE TABLE sys_tiles (
+	id serial NOT NULL,
+	"row" int4 NULL,
+	col int4 NULL,
+	gridcode varchar(255) NULL,
+	net_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	sys_id int4 NULL,
+	CONSTRAINT sys_tiles_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_tiles_net_id_fkey FOREIGN KEY (net_id) REFERENCES nets(id),
+	CONSTRAINT sys_tiles_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.sys_versions;
+
+CREATE TABLE sys_versions (
+	id serial NOT NULL,
+	"version" int4 NULL,
+	spice_version int4 NULL,
+	csv_version int4 NULL,
+	placer_version int4 NULL,
+	router_version int4 NULL,
+	sys_id int4 NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	CONSTRAINT sys_versions_pkey PRIMARY KEY (id),
+	CONSTRAINT sys_versions_sys_id_fkey FOREIGN KEY (sys_id) REFERENCES sys(id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.user_log;
+
+CREATE TABLE user_log (
+	id serial NOT NULL,
+	user_email varchar(255) NULL,
+	"event" varchar(255) NULL,
+	"action" varchar(255) NULL,
+	"createdAt" timestamptz NOT NULL,
+	"updatedAt" timestamptz NOT NULL,
+	session_id varchar(255) NULL,
+	duration_in_seconds int4 NULL,
+	CONSTRAINT user_log_pkey PRIMARY KEY (id)
+);
+
+-- Drop table
+
+-- DROP TABLE public.user_profile;
+
+CREATE TABLE user_profile (
+	user_id varchar(255) NOT NULL,
+	"filter" varchar(255) NULL DEFAULT ''::character varying,
+	CONSTRAINT user_profile_pkey PRIMARY KEY (user_id)
+);
