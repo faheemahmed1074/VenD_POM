@@ -36,34 +36,7 @@ public class ApplicationConfigReader {
     @Property("isEnableRecording")
     private String isEnableRecording;
 
-    @Property("chipSystem")
-    private String chipSystem;
-
-    @Property("chipToChip")
-    private String chipToChip;
-
-    @Property("topOverhang")
-    private String topOverhang;
-
-    @Property("bottomOverhang")
-    private String bottomOverhang;
-
-    @Property("leftOverhang")
-    private String leftOverhang;
-
-    @Property("rightOverhang")
-    private String rightOverhang;
-
-    @Property("systemName")
-    private String systemName;
-
-    @Property("systems")
-    private String systems;
-
 /*############################ --- Environment --- ############################*/
-
-    @Property("dbAutoName")
-    private String dbAutoName = "";
 
     @Property("dbName")
     private String dbName = "";
@@ -85,7 +58,6 @@ public class ApplicationConfigReader {
     public String getUserName() {
         return this.UserName;
     }
-
     public String getPassword() {
         return this.Password;
     }
@@ -116,22 +88,7 @@ public class ApplicationConfigReader {
     public String getIsEnableReporting() { return this.isEnableReporting; }
     public String getIsEnableRecording() { return this.isEnableRecording; }
 
-    public String getChipSystem() { return this.chipSystem; }
 
-    public String getSystemName() { return this.systemName; }
-
-    public String getChipToChip() { return this.chipToChip; }
-
-    public String getTopOverhang() { return this.topOverhang; }
-    public String getBottomOverhang() { return this.bottomOverhang; }
-    public String getLeftOverhang() { return this.leftOverhang; }
-    public String getRightOverhang() { return this.rightOverhang; }
-
-    public String getSystems() { return this.systems; }
-
-    public String getDbAutoName() {
-        return dbAutoName;
-    }
     public String getDbName() {
         return dbName;
     }

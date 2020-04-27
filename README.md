@@ -23,20 +23,3 @@ Jenkins setup:
   - Under Maven, add Name (“mvnLatest”) and check Install automatically
   - Click on Apply and then Save 
 
-zGlue CICD integration:
-  - Click on Create new Job
-  - Enter item name, select Freestyle Project and click on OK
-  - Click on Configure on left panel
-  - Under Source Code Management, select Git
-    - Add repo link: https://github.com/zglue/automation.git
-    - Add credentials
-    - State branch which has to be executed: */develop
-  - Under Build, select Add Build Step drop down and select Invoke top-level Maven targets
-    - Select mvnLatest under Maven Version
-    - In Goals, add mvn clean test
-  - Click on Apply and then Save
-
-Execution: 
-  - Click on Build Now
-  - Simultaneously, click on the newly generated build number under Build History
-  - Click on Console Output

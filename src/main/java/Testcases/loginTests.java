@@ -11,7 +11,8 @@ import static Config.configProperties.Password;
 public class loginTests extends baseTest {
 
     @Test(description = "Login App")
-    public static void loginIntoZGlueApplication(){
+    public static void loginIntoApplication()
+    {
         logStep("User is logged in successfully");
 
         MainCall.loginPage.clickLoginOnWelcomeScreen();
@@ -20,26 +21,13 @@ public class loginTests extends baseTest {
         MainCall.loginPage.clickGotIt();
         MainCall.loginPage.clickLogin();
         WebDriverWaits.waitUntilLoaderDisapears();
-        WebDriverWaits.waitUntilElementIsClickable(MainCall.systemPage.getChipletHeadingsList().get(0));
         MainCall.loginPage.selectSkipButton();
         WebDriverWaits.waitUntilLoaderDisapears();
-        WebDriverWaits.waitUntilElementIsClickable(MainCall.navBarPage.appLogo());
-        MainCall.navBarPage.selectDeveloperRole();
-    }
 
-    @Test(description = "Logout App")
-    public static void logoutZGlueApplication() throws InterruptedException{
-//        loginIntoZGlueApplication();
-
-        MainCall.navBarPage.selectSettingsIcon("open");
-        MainCall.navBarPage.selectLogout();
-        MainCall.commonLocators.selectYes();
-
-        logStep("User is logged out successfully");
     }
 
 //    @Test(description = "Sign Up")
-    public static void signUpZGlueApplication() throws InterruptedException{
+    public static void signApplication() throws InterruptedException{
         logStep("User sign up");
 
         MainCall.loginPage.selectNewUser();

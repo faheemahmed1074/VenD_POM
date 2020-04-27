@@ -40,11 +40,11 @@ public class baseTest extends LogHelper {
         // connect db connection
         dbConn.dbConnection();
 
-//        MainCall.preReq();
+        // API's to be executed
 //        MainCall.setupPreReqs();
 
         WebDriverFactory.getInstance();
-        loginTests.loginIntoZGlueApplication();
+        loginTests.loginIntoApplication();
     }
 
     @BeforeMethod
@@ -81,10 +81,6 @@ public class baseTest extends LogHelper {
             MainCall.getExtentReport().endTest(logger);
         }
 
-//        WebDriverFactory.getDriver().navigate().to(Url + "systems");
-        MainCall.navBarPage.selectAppLogo();
-        WebDriverWaits.waitUntilLoaderDisapears();
-        WebDriverWaits.waitUntilElementIsClickable(MainCall.systemPage.getChipletHeadingsList().get(0));
 
         if(IsEnableRecording.equals("true"))
             Recorder.stopRecording();
@@ -96,8 +92,7 @@ public class baseTest extends LogHelper {
     }
 
     @AfterSuite
-    public void tearDown() throws InterruptedException, SQLException {
-//        dbConn.dropDb();
+    public void tearDown() {
 
         if(IsEnableReporting.equals("true")) {
             MainCall.getExtentReport().flush();

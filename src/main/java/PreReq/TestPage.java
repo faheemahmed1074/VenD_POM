@@ -19,7 +19,7 @@ public class TestPage {
     public static Response saveAsSystems(String name, String randName, int systemId) throws SQLException {
         envGlobals.response =
                 given()
-                        .headers("Authorization", envGlobals.auth, "Content-Type", envGlobals.contentType, "referer", envGlobals.referer)
+                        .headers("Authorization", "exampleAuth", "Content-Type", "content", "referer", "reference")
                         .body(RequestPayloads.saveAsSystem(name, randName, systemId))
 //                        .log().all()
                 .when()
@@ -37,7 +37,7 @@ public class TestPage {
     public static Response getSystems() {
         envGlobals.response =
                 given()
-                        .headers("Authorization", envGlobals.auth, "referer", envGlobals.referer)
+                        .headers("Authorization", "exampleAuth", "referer", "reference")
 //                        .log().all()
                 .when()
                         .get("/app/systems")

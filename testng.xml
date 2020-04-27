@@ -2,76 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Phase1 Suite">
+
     <test name="Login And Logout">
         <classes>
-            <class name="Testcases.loginTests"/>
-        </classes>
-    </test>
-
-    <!--<test name="CREATION AND DELETION Systems">-->
-    <!--<test name="Systems">-->
-        <!--<classes>-->
-            <!--<class name="Testcases.systemTests">-->
-                <!--<methods>-->
-                    <!--<include name="createNewSystem"/>-->
-                    <!--<include name="verifyNewSystem"/>-->
-                    <!--<include name="importSystem"/>-->
-                    <!--<include name="deleteSystems"/>-->
-                    <!--<include name="saveAsSystem"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
-
-    <!--<test name="Chiplet Placements">-->
-        <!--<classes>-->
-            <!--<class name="Testcases.chipletTests">-->
-                <!--<methods>-->
-                    <!--<include name="placement"/>-->
-                    <!--<include name="moveChipletByDragAndDropPanAndFitFunctionalityChecks"/>-->
-                    <!--<include name="verifyZoomInAndZoomOutFunctionality"/>-->
-                    <!--<include name="verifyLockSystem"/>-->
-                    <!--<include name="verifySaveAsFeature"/>-->
-                    <!--<include name="verifyChipDetails"/>-->
-                    <!--<include name="verifySnapToGridFunctionality"/>-->
-                    <!--<include name="dragAndDrop"/>-->
-                    <!--<include name="manualDragAndDrop"/>-->
-                    <!--<include name="rotateChiplet"/>-->
-                    <!--<include name="removeChiplet"/>-->
-                    <!--<include name="editChipletViewDetails"/>-->
-                    <!--<include name="enforcePlacementRule"/>-->
-                <!--</methods>-->
-            <!--</class>-->
-        <!--</classes>-->
-    <!--</test>-->
-
-    <test name="Schematic and Routing">
-        <classes>
-            <class name="Testcases.schematicTests">
-                <methods>
-                    <include name="powerSupplyConnections"/>
-                    <include name="gpioExpanderConnection"/>
-                    <include name="levelShifterConnections"/>
-                    <!--<include name="resistorsConnections"/>-->
-                    <!--<include name="bondPadConnection"/>-->
-                    <!--<include name="endToEndSchematic"/>-->
-                </methods>
+            <class name="Testcases.loginTests">
+                    <methods>
+                        <include name="loginIntoZGlueApplication"></include>
+                    </methods>
             </class>
+
         </classes>
     </test>
-
-    <test name="Routing">
-        <classes>
-            <class name="Testcases.routerTests">
-                <methods>
-                    <include name="routeTestSystem1019"/>
-                    <include name="routeTestSystem1328"/>
-                    <include name="routeTestSystem674"/>
-                    <include name="otg"/>
-                    <include name="changeTypeDeleteBondpad"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
 </suite>
