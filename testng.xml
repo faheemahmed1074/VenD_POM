@@ -7,8 +7,17 @@
         <classes>
             <class name="Testcases.loginTests">
                     <methods>
-                        <include name="loginIntoZGlueApplication"></include>
+                        <include name="loginIntoApplication"></include>
+                        <include name="Scrolling"></include>
+                        <include name="ListBoxDemo"></include>
                     </methods>
+            </class>
+            <class name="Testcases.TrainingSession">
+                <methods>
+                    <include name="AlertWindow"></include>
+                    <include name="Slider"></include>
+                    <include name="JavaScriptAlert"></include>
+                </methods>
             </class>
 
         </classes>

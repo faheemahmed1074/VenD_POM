@@ -30,6 +30,9 @@ public class ApplicationConfigReader {
      @Property("url")
     private String url;
 
+    @Property("LogTestRail")
+    private String LogTestRail;
+
     @Property("isEnableReporting")
     private String isEnableReporting;
 
@@ -97,6 +100,8 @@ public class ApplicationConfigReader {
     }
     public String getDbUsername() { return dbUsername; }
     public String getDbPassword() { return dbPassword; }
+    public String getLogTestRail() { return LogTestRail; }
+
 
 
 }

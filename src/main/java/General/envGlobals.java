@@ -10,6 +10,7 @@ import static Config.configProperties.Url;
 
 public class envGlobals {
 
+    public static StringBuilder Differnce = new StringBuilder() ;
     public static RequestSpecification requestSpecification;
     public static Response response;
     public static String requestBody = "";

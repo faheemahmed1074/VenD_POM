@@ -64,4 +64,14 @@ public class MainCall {
 
 
 
+    public static void restAssuredPreReq() {
+        //baseTest.REQUEST = RestAssured.given().baseUri(coreBaseUrl);
+        //RestAssured.baseURI = baseUrl;
+        //RestAssured.port = Integer.valueOf(Port);
+        //REQUEST = RestAssured.given().contentType(ContentType.JSON);
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL);
+        //  BasicConfigurator.configure();
+
+    }
+
 }

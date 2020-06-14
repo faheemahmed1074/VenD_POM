@@ -22,6 +22,6 @@ public class configProperties {
     public static String dbUsername = appConfig.getDbUsername();
     public static String dbPassword = appConfig.getDbPassword();
 
-
+    public static String LogTestRail = appConfig.getLogTestRail();
 
 }

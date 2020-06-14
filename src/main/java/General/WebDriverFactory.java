@@ -18,8 +18,9 @@ public class WebDriverFactory {
     static String device = Device; // Change to windows or mac accordingly
     static Boolean headless = Boolean.valueOf(Headless);
 
-    static String chromeDriverPath = device.equals("Windows") ? "driver/chromedriver.exe" : "driver/chromedriver";
+    static String chromeDriverPath = device.equals("Windows") ? "driver/chromedriver.exe" : "/usr/bin/chromedriver12";
     static String geckoDriverPath = device.equals("Windows") ? "driver/geckodriver.exe" : "driver/geckodriver";
+    static String UbuntuChromDriverPath = device.equals("Ubuntu") ? "driver/UbuntuChromedriver" : "driver/chromedriver";
     public static Actions action;
     public static Robot robot;
 
@@ -42,9 +43,19 @@ public class WebDriverFactory {
         switch (Browser)
         {
             case "Chrome":
-                System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-                driver = new ChromeDriver(op);
-                break;
+                if (device.equals("Windows"))
+                {
+                    System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+                    driver = new ChromeDriver(op);
+                    break;
+                }
+                else if (device.equals("Ubuntu"))
+
+                {
+                    System.setProperty("webdriver.chrome.driver", UbuntuChromDriverPath);
+                    driver = new ChromeDriver(op);
+                    break;
+                }
             case "IE":
                 driver = new InternetExplorerDriver();
                 break;
