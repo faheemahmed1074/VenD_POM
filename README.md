@@ -22,4 +22,10 @@ Jenkins setup:
   - Click on Global Tool Configuration
   - Under Maven, add Name (“mvnLatest”) and check Install automatically
   - Click on Apply and then Save 
+  
+  Framework Understanding Video:
+  https://drive.google.com/drive/folders/0BwmieK6G4SFUfm9jMVBGd3YtSlFMVExTV3ZVOTlrOUszcjBMUXRrX1ZGNkotNnowRnNHSGM
+  
+  Reports created under Report folder, sample report provided under report folder
+  
 
