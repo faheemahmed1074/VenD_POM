@@ -6,36 +6,9 @@
       <class name="testcases.LoginTests">
         <methods>
           <include name="loginIntoApplication"/>
-          <include name="Scrolling"/>
-          <include name="ListBoxDemo"/>
         </methods>
       </class> <!-- testcases.LoginTests -->
-      <class name="testcases.TrainingSession">
-        <methods>
-          <include name="AlertWindow"/>
-          <include name="Slider"/>
-          <include name="JavaScriptAlert"/>
-        </methods>
-      </class> <!-- testcases.TrainingSession -->
+      <class name="testcases.TrainingSession"/>
     </classes>
   </test> <!-- Login And Logout -->
-  <test name="Login And Logout(failed)">
-    <classes>
-      <class name="testcases.TrainingSession">
-        <methods>
-          <include name="Slider"/>
-          <include name="JavaScriptAlert"/>
-          <include name="AlertWindow"/>
-        </methods>
-      </class> <!-- testcases.TrainingSession -->
-      <class name="testcases.LoginTests">
-        <methods>
-          <include name="Scrolling"/>
-          <include name="ListBoxDemo"/>
-          <include name="loginIntoApplication"/>
-          <include name="beforesuite"/>
-        </methods>
-      </class> <!-- testcases.LoginTests -->
-    </classes>
-  </test> <!-- Login And Logout(failed) -->
 </suite> <!-- Failed suite [Phase1 Suite] -->

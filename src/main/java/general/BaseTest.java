@@ -8,6 +8,8 @@ import com.venturedive.base.exception.APIException;
 import com.venturedive.base.utility.JIRA;
 
 import static general.EnvGlobals.Differnce;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -63,12 +65,9 @@ public class BaseTest extends LogHelper {
         // connect db connection
 //        dbConn.dbConnection();
         startReport();
-//        if (LogTestRail.equals("true")){
-//            TestRail.createSuite(ctx);
-//        }
-        WebDriverFactory.getInstance();
-//        loginTests.loginIntoApplication();
 
+        WebDriverManager.chromedriver().setup();
+        WebDriverFactory.getInstance();
         startTime = getTime();
         automationSteps = new ArrayList<String>();
         expectedResults=new ArrayList<String>();
@@ -91,12 +90,6 @@ public class BaseTest extends LogHelper {
         if(IsEnableRecording.equals("true"))
             Recorder.startRecording(method.getName());
 
-//        WebDriverFactory.getInstance();
-
-        // To set Base url & content type
-//        if (LogTestRail.equals("true")){
-//            MainCall.restAssuredPreReq();
-//        }
         if(IsEnableReporting.equals("true")) {
             logger = MainCall.getExtentReport().startTest(method.getName(), "");
             logger.setStartedTime(getTime());
@@ -161,14 +154,8 @@ public class BaseTest extends LogHelper {
 
                 logger.setEndedTime(getTime());
                 MainCall.getExtentReport().endTest(logger);
-
-                // Enable below line to print response of every API
-//                System.out.println("method name: " + result.getMethod().getMethodName());
-//                ReusableFunctions.printResponse();
             }
         }
-
-
         if(IsEnableRecording.equals("true"))
             Recorder.stopRecording();
 
