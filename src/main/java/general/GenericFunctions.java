@@ -1,13 +1,15 @@
 package general;
 
 
+import com.mysql.cj.exceptions.AssertionFailedException;
+import jdk.jfr.internal.tool.Main;
 import objects.CommonLocators;
 import io.percy.selenium.Percy;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,4 +142,99 @@ public class GenericFunctions {
         percy.snapshot(Name);
         Thread.sleep(2000);
     }
+    public static void assertion(int actual,int expected)
+    {
+        Assert.assertEquals(actual,expected);
+    }
+    public static void assertion(By locator,String expected)
+    {
+        String text = WebDriverFactory.getDriver().findElement(locator).getText();
+        Assert.assertEquals(text,expected);
+    }
+
+    public static void driverStart(String url)
+    {
+        WebDriverFactory.getDriver().get(url);
+        WebDriverFactory.getDriver().manage().window().maximize();
+
+    }
+
+    public static void scrollToElement(By locator)
+    {
+        ((JavascriptExecutor)WebDriverFactory.getDriver()).executeScript("arguments[0].scrollIntoView();", WebDriverFactory.getDriver().findElement(locator));
+
+    }
+
+    public static void selectElementFromDropDownByText(By locator,String value)
+    {
+        WebElement select = MainCall.webDriverFactory.getDriver().findElement(locator);
+        Select option = new Select(select);
+        option.selectByVisibleText(value);
+    }
+
+    public static void clickSpecificElementFromList(By locator,int index)
+    {
+        List<WebElement> launchModule = MainCall.webDriverFactory.getDriver().findElements(locator);
+        launchModule.get(index).click();
+    }
+
+    public static void slideBar(By locator1,By locator2, int xOffset,int yOffset)
+    {
+        WebElement slider = MainCall.webDriverFactory.getDriver().findElement(locator1).findElement(locator2);
+        Actions act = new Actions(WebDriverFactory.getDriver());
+        act.dragAndDropBy(slider,xOffset,yOffset).build().perform();
+    }
+
+    public static void inputTextAlert(String input)
+    {
+        MainCall.webDriverFactory.getDriver().switchTo().alert().sendKeys(input);
+    }
+
+    public static void acceptAlert()
+    {
+        MainCall.webDriverFactory.getDriver().switchTo().alert().accept();
+    }
+    public static void radioButtonClick(By locator,int index)
+    {
+        List<WebElement> radiobutton = WebDriverFactory.getDriver().findElements(locator);
+        radiobutton.get(index).click();
+    }
+
+    public static void assertionToDisplayed(By locator)
+    {
+        org.junit.Assert.assertTrue(MainCall.webDriverFactory.getDriver().findElement(locator).isDisplayed());
+    }
+
+
+
+    public static void click(By locator)
+    {
+        try {
+            MainCall.webDriverWaits.visibilityOf(locator);
+            {
+                WebElement button = MainCall.webDriverWaits.waitUntilElementIsClickable(locator);
+                {
+                    button.click();
+                }
+            }
+        }
+        catch (ElementNotVisibleException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is not on screen", locator));
+        }
+        catch (StaleElementReferenceException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is Stale", locator));
+        }
+        catch (InvalidElementStateException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is not in desired state", locator));
+        }
+        catch (Exception e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is invalid", locator));
+        }
+    }
+
+
 }

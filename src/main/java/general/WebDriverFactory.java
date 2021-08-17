@@ -6,8 +6,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import io.github.bonigarcia.wdm.WebDriverManager;
-
 import java.awt.*;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -17,10 +15,6 @@ public class WebDriverFactory {
     static WebDriver driver;
     static String device = Device; // Change to windows or mac accordingly
     static Boolean headless = Boolean.valueOf(Headless);
-
-//    static String chromeDriverPath = device.equals("Windows") ? "driver/chromedriver.exe" : "/usr/bin/chromedriver12";
-//    static String geckoDriverPath = device.equals("Windows") ? "driver/geckodriver.exe" : "driver/geckodriver";
-//    static String UbuntuChromDriverPath = device.equals("Ubuntu") ? "driver/chromedriver" : "driver/chromedriver";
     public static Actions action;
     public static Robot robot;
 
@@ -45,7 +39,6 @@ public class WebDriverFactory {
             case "Chrome":
                 if (device.equals("Windows"))
                 {
-//                    System.setProperty("webdriver.chrome.driver", chromeDriverPath);
                     driver = new ChromeDriver(op);
                     break;
                 }
@@ -53,16 +46,12 @@ public class WebDriverFactory {
 
                 {
                     driver = new ChromeDriver(op);
-//                    System.setProperty("webdriver.chrome.driver", UbuntuChromDriverPath);
-
-//                    driver = new ChromeDriver(op);
                     break;
                 }
             case "IE":
                 driver = new InternetExplorerDriver();
                 break;
             case "Firefox":
-//                System.setProperty("webdriver.gecko.driver", geckoDriverPath);
                 driver = new FirefoxDriver();
                 break;
         }
@@ -75,7 +64,6 @@ public class WebDriverFactory {
 
         return driver;
     }
-
     public static WebDriver getDriver() {
         if (driver != null) {
             return driver;
@@ -85,7 +73,6 @@ public class WebDriverFactory {
             throw new IllegalStateException("Driver has not been initialized");
         }
     }
-
     public static void finishDriver()
     {
         if (driver != null)

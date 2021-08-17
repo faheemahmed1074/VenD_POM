@@ -5,6 +5,7 @@ import preReq.TestBase;
 import com.relevantcodes.extentreports.ExtentReports;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
+import utils.LogHelper;
 
 import java.io.File;
 import java.sql.SQLException;
@@ -16,6 +17,14 @@ public class MainCall {
 
     static ExtentReports extent;
 
+    public final static CommonLocators commonLocators = new CommonLocators();
+    public final static LoginPage loginPage = new LoginPage();
+    public final static GenericFunctions genericFunctions = new GenericFunctions();
+    public final static EnvGlobals envGlobals = new EnvGlobals();
+    public final static WebDriverFactory webDriverFactory = new WebDriverFactory();
+    public final static TrainingSessionPage trainingSessionPage = new TrainingSessionPage();
+    public final static LogHelper logHelper = new LogHelper();
+    public final static WebDriverWaits webDriverWaits = new WebDriverWaits();
 
     public static ExtentReports startReport()
     {
@@ -55,11 +64,6 @@ public class MainCall {
     }
 
 
-    public final static CommonLocators commonLocators = new CommonLocators();
-    public final static LoginPage loginPage = new LoginPage();
-
-
-
     public static void restAssuredPreReq() {
         //baseTest.REQUEST = RestAssured.given().baseUri(coreBaseUrl);
         //RestAssured.baseURI = baseUrl;
@@ -69,5 +73,7 @@ public class MainCall {
         //  BasicConfigurator.configure();
 
     }
+
+
 
 }
