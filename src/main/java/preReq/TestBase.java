@@ -42,7 +42,7 @@ public class TestBase {
 
             for (int j=0 ; j<sysCount ; j++) {
                 if (name.equals("AutoSystem" + j)){
-                    sysId.add(EnvGlobals.response.body().path("systems["+ i +"].id"));
+                    sysId.add((Integer) EnvGlobals.response.body().path("systems["+ i +"].id"));
                     break;
                 }
             }

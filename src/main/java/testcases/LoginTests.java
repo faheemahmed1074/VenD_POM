@@ -67,9 +67,7 @@ public class LoginTests extends BaseTest {
 
 
         //scroll by element
-        ((JavascriptExecutor)WebDriverFactory.getDriver()).executeScript("arguments[0].scrollIntoView();", WebDriverFactory.getDriver().findElement(By.className("crayon-pre")));
-
-
+        ((JavascriptExecutor)WebDriverFactory.getDriver()).executeScript("arguments[0].scrollIntoView();", WebDriverFactory.getDriver().findElement(By.xpath("//a[text()='Discuss on Helpdesk']")));
         Thread.sleep(5000);
 //        driver.quit();
     }
