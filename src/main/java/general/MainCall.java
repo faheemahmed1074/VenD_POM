@@ -6,6 +6,7 @@ import preReq.TestBase;
 import com.relevantcodes.extentreports.ExtentReports;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
+import preReq.TestPage;
 import utils.LogHelper;
 
 import java.io.File;
@@ -46,6 +47,7 @@ public class MainCall {
     public final static LogHelper logHelper = new LogHelper();
     public final static WebDriverWaits webDriverWaits = new WebDriverWaits();
     public final static DbConn dbConn = new DbConn();
+    public final static TestPage preReq = new TestPage();
 
 
     public static ExtentReports getExtentReport()

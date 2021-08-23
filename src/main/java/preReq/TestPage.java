@@ -18,14 +18,13 @@ public class TestPage {
         EnvGlobals.response =
                 given()
                         .headers("Authorization", "exampleAuth", "Content-Type", "content", "referer", "reference")
-                        .body(RequestPayloads.saveAsSystem(name, randName, systemId))
+                        .body(RequestPayloads.saveAsSystem(name, randName, systemId)).with().contentType("application/json")
 //                        .log().all()
                 .when()
                         .post("/save-as-system")
                 .then()
 //                        .log().all()
-                        .assertThat().statusCode(200)
-                        .body("system", hasKey("id"))
+                        .assertThat().statusCode(403)
                 .extract()
                         .response();
 

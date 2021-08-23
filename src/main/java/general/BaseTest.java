@@ -61,6 +61,9 @@ public class BaseTest extends LogHelper {
 
     @BeforeSuite
     public void beforesuite(ITestContext ctx) throws SQLException, IOException, AWTException, APIException {
+
+        //for pre request apis
+        MainCall.preReq.saveAsSystems("test","3",3);
         startReport();
         if(IsEnableRecording.equals("true"))
             Recorder.deleteRecordings();
