@@ -97,64 +97,33 @@ public class BaseTest extends LogHelper {
     public void QuitDriver(ITestResult result, ITestContext ctx, Method method) throws Exception {
         afterAddingStepsLength=automationSteps.size();
         afterAddingExpectedResultLength=expectedResults.size();
-        System.out.println("After Actual"+afterAddingStepsLength);
-        System.out.println("After Expected"+afterAddingExpectedResultLength);
         if(IsEnableReporting.equals("true")) {
             if (result.getStatus() == ITestResult.FAILURE) {
+                failedCount++;
                 logger.log(LogStatus.FAIL, "Test Case Failed reason is: " + result.getThrowable());
                 logger.log(LogStatus.INFO, "StackTrace Result: " + Arrays.toString(result.getThrowable().getStackTrace()));
                 logger.log(LogStatus.FAIL, logger.addScreenCapture(Screenshots.takeScreenshot(result.getMethod().getMethodName())));
                 screenShotCollection.add(Screenshots.screenShot);
-                if(LogTestRail.equals("true")){
-                    JIRA.CreateJiraWithScreenShot(result,Screenshots.screenShot , beforeAddingStepsLength, afterAddingStepsLength, automationSteps);
+                if (LogTestRail.equals("true")) {
+                    JIRA.CreateJiraWithScreenShot(result, Screenshots.screenShot, beforeAddingStepsLength, afterAddingStepsLength, automationSteps);
                     JIRA.PostMobileIssuesJira();
                 }
-            }
-            else if (result.getStatus() == ITestResult.SKIP)
-            {
+            } else if (result.getStatus() == ITestResult.SKIP) {
                 skippedCount++;
                 logger.log(LogStatus.SKIP, "Test Case Skipped is: " + result.getName());
-            }
-            else
-            {
+            } else {
                 passedCount++;
                 logger.log(LogStatus.PASS, result.getMethod().getMethodName() + " is Passed");
             }
 
             logger.setEndedTime(getTime());
             MainCall.getExtentReport().endTest(logger);
-
-            if (IsEnableReporting.equals("true")) {
-
-                if (result.getStatus() == ITestResult.FAILURE) {
-
-                    failedCount++;
-                    logger.log(LogStatus.FAIL, "Test Case Failed reason is: " + result.getThrowable());
-                    logger.log(LogStatus.FAIL, "Test Case Failed reason is: " + Differnce.toString());
-
-                    if (BaseConfigProperties.LogJIRA.equals("True"))
-                    {
-                        JIRA.CreateJira(result);
-                    }
-                } else if (result.getStatus() == ITestResult.SKIP) {
-
-                    skippedCount++;
-                    logger.log(LogStatus.SKIP, "Test Case Skipped is: " + result.getName());
-                } else if (result.getStatus() == ITestResult.SUCCESS) {
-
-                    passedCount++;
-                    logger.log(LogStatus.PASS, result.getMethod().getMethodName() + " is Passed");
-                    logger.log(LogStatus.PASS, "All the Assertions have been Passed");
-                }
-
-                logger.setEndedTime(getTime());
-                MainCall.getExtentReport().endTest(logger);
-            }
         }
         if(IsEnableRecording.equals("true"))
             Recorder.stopRecording();
         TestRail.getCaseIdandResultmobile(result,ctx,method,beforeAddingStepsLength,afterAddingStepsLength,automationSteps,beforeAddingExpectedResultLength,afterAddingExpectedResultLength,expectedResults,null);
         }
+
 
     private Date getTime(){
         Calendar calendar = Calendar.getInstance();
