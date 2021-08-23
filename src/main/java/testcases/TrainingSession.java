@@ -31,7 +31,7 @@ public class TrainingSession extends BaseTest {
         MainCall.trainingSessionPage.EnterTextInAlertBox();
         MainCall.genericFunctions.PercyCapture("JavaScriptAlert");
     }
-    @Test(description = "124640")
+    @Test(description = "225371")
     public static void InputForm() throws InterruptedException
     {
         MainCall.genericFunctions.driverStart("https://www.seleniumeasy.com/test/input-form-demo.html");

@@ -26,5 +26,9 @@ public class ConfigProperties {
     public static String LogJIRA = appConfig.getLogJIRA();
     public static String UpdateCase = appConfig.getUpdateCase();
     public static String TemplateId = appConfig.getTemplateId();
+    public static String IsSendEmailAfterExecution = appConfig.getSendEmailAfterExecution();
+    public static String db = appConfig.getDb();
+    public static String dbPort = appConfig.getDbPort();
+
 
 }

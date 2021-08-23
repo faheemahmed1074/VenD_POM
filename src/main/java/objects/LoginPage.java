@@ -2,15 +2,10 @@ package objects;
 
 import general.MainCall;
 import general.WebDriverFactory;
-import general.WebDriverWaits;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
 import static config.ConfigProperties.Url;
 import static config.ConfigProperties.appConfig;
-import static utils.LogHelper.logStep;
 
 public class LoginPage
 {
@@ -112,7 +107,7 @@ public class LoginPage
         MainCall.webDriverFactory.getDriver().findElement(byEmail).sendKeys(MainCall.envGlobals.email );
         MainCall.webDriverFactory.getDriver().findElement(byPassword).sendKeys(MainCall.envGlobals.password );
         MainCall.webDriverFactory.getDriver().findElement(byCompany).sendKeys(MainCall.envGlobals.company);
-        MainCall.webDriverFactory.getDriver().findElement(byTermsAndConditionCheck).click();
+        MainCall.genericFunctions.click(byTermsAndConditionCheck);
     }
 
     public void selectForgetPasswordSumbit(){
@@ -132,7 +127,7 @@ public class LoginPage
     {
         MainCall.genericFunctions.selectElementFromDropDownByText(bySelector,value1);
         MainCall.genericFunctions.selectElementFromDropDownByText(bySelector,value2);
-        MainCall.webDriverFactory.getDriver().findElement(byAdd).click();
+        MainCall.genericFunctions.click(byAdd);
     }
 }
 

@@ -20,14 +20,6 @@ import static org.apache.commons.lang3.StringUtils.substringAfter;
 
 public class GenericFunctions {
 
-    public static By byButton = By.tagName("button");
-    public static By byInput = By.tagName("input");
-    //    int rowCount = WebDriverFactory.getDriver().findElements(commonLocators.byTr).size() - 1;
-    int countB ;
-    int totalCountB ;
-    int countA;
-    int totalCountA ;
-
     public static String generateRandomNum(int length)
     {
         String RawRandomNumber = RandomStringUtils.randomNumeric(length);
@@ -144,12 +136,35 @@ public class GenericFunctions {
     }
     public static void assertion(int actual,int expected)
     {
+
         Assert.assertEquals(actual,expected);
     }
     public static void assertion(By locator,String expected)
     {
-        String text = WebDriverFactory.getDriver().findElement(locator).getText();
-        Assert.assertEquals(text,expected);
+        try {
+            MainCall.webDriverWaits.visibilityOf(locator);
+            {
+                String text = WebDriverFactory.getDriver().findElement(locator).getText();
+                Assert.assertEquals(text, expected);
+            }
+        }
+        catch (ElementNotVisibleException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is not on screen", locator));
+        }
+        catch (StaleElementReferenceException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is Stale", locator));
+        }
+        catch (InvalidElementStateException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is not in desired state", locator));
+        }
+        catch (Exception e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is invalid", locator));
+        }
+
     }
 
     public static void driverStart(String url)
@@ -161,12 +176,34 @@ public class GenericFunctions {
 
     public static void scrollToElement(By locator)
     {
-        ((JavascriptExecutor)WebDriverFactory.getDriver()).executeScript("arguments[0].scrollIntoView();", WebDriverFactory.getDriver().findElement(locator));
+        try {
+            MainCall.webDriverWaits.visibilityOf(locator);
+            {
+                ((JavascriptExecutor) WebDriverFactory.getDriver()).executeScript("arguments[0].scrollIntoView();", WebDriverFactory.getDriver().findElement(locator));
+            }
+        }
+        catch (ElementNotVisibleException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is not on screen", locator));
+        }
+        catch (StaleElementReferenceException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is Stale", locator));
+        }
+        catch (InvalidElementStateException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is not in desired state", locator));
+        }
+        catch (Exception e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is invalid", locator));
+        }
 
     }
 
     public static void selectElementFromDropDownByText(By locator,String value)
     {
+
         WebElement select = MainCall.webDriverFactory.getDriver().findElement(locator);
         Select option = new Select(select);
         option.selectByVisibleText(value);
@@ -202,7 +239,28 @@ public class GenericFunctions {
 
     public static void assertionToDisplayed(By locator)
     {
-        org.junit.Assert.assertTrue(MainCall.webDriverFactory.getDriver().findElement(locator).isDisplayed());
+        try {
+            MainCall.webDriverWaits.visibilityOf(locator);
+            {
+                org.junit.Assert.assertTrue(MainCall.webDriverFactory.getDriver().findElement(locator).isDisplayed());
+            }
+        }
+        catch (ElementNotVisibleException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is not on screen", locator));
+        }
+        catch (StaleElementReferenceException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is Stale", locator));
+        }
+        catch (InvalidElementStateException e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is not in desired state", locator));
+        }
+        catch (Exception e)
+        {
+            throw new AssertionFailedException(String.format("The element provided {0} is invalid", locator));
+        }
     }
 
 
@@ -210,7 +268,7 @@ public class GenericFunctions {
     public static void click(By locator)
     {
         try {
-            MainCall.webDriverWaits.visibilityOf(locator);
+             MainCall.webDriverWaits.visibilityOf(locator);
             {
                 WebElement button = MainCall.webDriverWaits.waitUntilElementIsClickable(locator);
                 {

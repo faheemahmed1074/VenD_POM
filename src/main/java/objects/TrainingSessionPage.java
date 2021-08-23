@@ -29,11 +29,13 @@ public class TrainingSessionPage {
   }
   public void slideThirdRangeSlider()
   {
+
       MainCall.genericFunctions.slideBar(bySlideBar,byRange,60,0);
   }
 
   public void verifySuccessMessage()
   {
+
       MainCall.genericFunctions.assertion(bySuccess,"66");
   }
 

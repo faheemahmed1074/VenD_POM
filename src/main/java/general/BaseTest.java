@@ -7,8 +7,13 @@ import com.venturedive.base.database.connection.SonarDB;
 import com.venturedive.base.exception.APIException;
 import com.venturedive.base.utility.JIRA;
 
+import static config.ConfigProperties.*;
 import static general.EnvGlobals.Differnce;
 
+import com.venturedive.base.utility.JIRA;
+import com.venturedive.base.utility.SendEmailAfterExecution;
+import com.venturedive.base.utility.TestRail;
+import dbConnection.DbConn;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -18,6 +23,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import utils.LogHelper;
 
+import javax.mail.MessagingException;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -28,13 +34,10 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
-import static config.ConfigProperties.IsEnableRecording;
-import static config.ConfigProperties.IsEnableReporting;
-import static config.ConfigProperties.LogTestRail;
-
 public class BaseTest extends LogHelper {
 
     ExtentTest logger;
+
     boolean chipUpdateQuery = false;
 
     //    For Reporting to insert into database
@@ -58,17 +61,11 @@ public class BaseTest extends LogHelper {
 
     @BeforeSuite
     public void beforesuite(ITestContext ctx) throws SQLException, IOException, AWTException, APIException {
-        if(IsEnableReporting.equals("true"))
-            MainCall.startReport();
+        startReport();
         if(IsEnableRecording.equals("true"))
             Recorder.deleteRecordings();
-        // connect db connection
-//        dbConn.dbConnection();
-        startReport();
-
         WebDriverManager.chromedriver().setup();
-        WebDriverFactory.getInstance();
-        startTime = getTime();
+        MainCall.webDriverFactory.getInstance();
         automationSteps = new ArrayList<String>();
         expectedResults=new ArrayList<String>();
     }
@@ -148,8 +145,6 @@ public class BaseTest extends LogHelper {
                     passedCount++;
                     logger.log(LogStatus.PASS, result.getMethod().getMethodName() + " is Passed");
                     logger.log(LogStatus.PASS, "All the Assertions have been Passed");
-
-//                    logger.log(LogStatus.PASS, ReusableFunctions.getResponse());
                 }
 
                 logger.setEndedTime(getTime());
@@ -158,9 +153,8 @@ public class BaseTest extends LogHelper {
         }
         if(IsEnableRecording.equals("true"))
             Recorder.stopRecording();
-
-        com.venturedive.base.utility.TestRail.getCaseIdandResultmobile(result, ctx, method , beforeAddingStepsLength, afterAddingStepsLength, automationSteps, beforeAddingExpectedResultLength, afterAddingExpectedResultLength,expectedResults);
-    }
+        TestRail.getCaseIdandResultmobile(result,ctx,method,beforeAddingStepsLength,afterAddingStepsLength,automationSteps,beforeAddingExpectedResultLength,afterAddingExpectedResultLength,expectedResults,null);
+        }
 
     private Date getTime(){
         Calendar calendar = Calendar.getInstance();
@@ -168,19 +162,23 @@ public class BaseTest extends LogHelper {
     }
 
     @AfterSuite
-    public void tearDown() throws SQLException {
-
+    public void tearDown() throws SQLException, APIException, IOException, MessagingException {
+        endTime = getTime();
+        dbconn.insertReportingDataIntoDB(startTime, passedCount, failedCount, skippedCount, startTime, endTime); //need to open after jira integration
+        if(IsSendEmailAfterExecution.equals("True")) {
+            System.out.println("sendEmail");
+            SendEmailAfterExecution.sendReportAfterExecution(passedCount, failedCount, skippedCount);
+        }
+        MainCall.webDriverFactory.finishDriver();
         if(IsEnableReporting.equals("true")) {
             MainCall.getExtentReport().flush();
             MainCall.getExtentReport().close();
         }
-
-        WebDriverFactory.finishDriver();
-        endTime = getTime();
-//        if (LogTestRail.equals("true")) {
-//            com.venturedive.base.utility.TestRail.createSuite();
-//        }
-//        dbconn.insertReportingDataIntoDB(startTime, passedCount, failedCount, skippedCount, startTime, endTime); //need to open after jira integration
+        if (LogTestRail.equals("true")) {
+           TestRail.createSuite();
+           TestRail.updateTestRail();
+           TestRail.AttachImagesWithTestResults(screenShotCollection);
+        }
     }
 
 }

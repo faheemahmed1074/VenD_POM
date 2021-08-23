@@ -1,5 +1,6 @@
 package general;
 
+import dbConnection.DbConn;
 import objects.*;
 import preReq.TestBase;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -17,14 +18,6 @@ public class MainCall {
 
     static ExtentReports extent;
 
-    public final static CommonLocators commonLocators = new CommonLocators();
-    public final static LoginPage loginPage = new LoginPage();
-    public final static GenericFunctions genericFunctions = new GenericFunctions();
-    public final static EnvGlobals envGlobals = new EnvGlobals();
-    public final static WebDriverFactory webDriverFactory = new WebDriverFactory();
-    public final static TrainingSessionPage trainingSessionPage = new TrainingSessionPage();
-    public final static LogHelper logHelper = new LogHelper();
-    public final static WebDriverWaits webDriverWaits = new WebDriverWaits();
 
     public static ExtentReports startReport()
     {
@@ -44,6 +37,16 @@ public class MainCall {
 
         return extent;
     }
+    public final static CommonLocators commonLocators = new CommonLocators();
+    public final static LoginPage loginPage = new LoginPage();
+    public final static GenericFunctions genericFunctions = new GenericFunctions();
+    public final static EnvGlobals envGlobals = new EnvGlobals();
+    public final static WebDriverFactory webDriverFactory = new WebDriverFactory();
+    public final static TrainingSessionPage trainingSessionPage = new TrainingSessionPage();
+    public final static LogHelper logHelper = new LogHelper();
+    public final static WebDriverWaits webDriverWaits = new WebDriverWaits();
+    public final static DbConn dbConn = new DbConn();
+
 
     public static ExtentReports getExtentReport()
     {

@@ -3,10 +3,13 @@ package testcases;
 import general.*;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
+
 public class LoginTests extends BaseTest {
 
-    @Test(description = "124640")
-    public static void loginIntoApplication() throws InterruptedException {
+    @Test(description = "225371")
+    public static void loginIntoApplication() throws InterruptedException, SQLException {
+        MainCall.dbConn.getValueFromColumn("select platform , Build , Project_Name from automation_report ar  where Project_Name LIKE '%Epharma%' AND Platform ='Web' order by id DESC limit 1;");
         MainCall.logHelper.logStep("User is logged in successfully");
         MainCall.genericFunctions.assertion(1,1);
         MainCall.genericFunctions.PercyCapture("loginIntoApplication");
@@ -28,14 +31,14 @@ public class LoginTests extends BaseTest {
         MainCall.loginPage.selectForgetPasswordSumbit();
     }
 
-    @Test (description = "124640")
+    @Test (description = "225371")
     public static void Scrolling() throws InterruptedException {
         MainCall.genericFunctions.driverStart("https://webkul.com/blog/how-to-scroll-in-a-specific-element-using-selenium-webdriver/");
         MainCall.webDriverWaits.sleep(5000);
         MainCall.loginPage.scrollToElement();
         Thread.sleep(5000);
     }
-    @Test (description = "124640")
+    @Test (description = "224710")
     public static void ListBoxDemo() throws InterruptedException {
         MainCall.genericFunctions.driverStart("https://www.seleniumeasy.com/test/jquery-dual-list-box-demo.html");
         MainCall.webDriverWaits.sleep(2000);

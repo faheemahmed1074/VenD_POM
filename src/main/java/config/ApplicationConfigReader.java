@@ -62,6 +62,15 @@ public class ApplicationConfigReader {
     @Property("dbPassword")
     private String dbPassword = "";
 
+    @Property("SendEmailAfterExecution")
+    private String SendEmailAfterExecution = "";
+
+    @Property("dbPort")
+    private String dbPort = "";
+
+    @Property("db")
+    private String db = "";
+
 
     public ApplicationConfigReader() {
         PropertyLoader.newInstance().populate(this);
@@ -121,6 +130,18 @@ public class ApplicationConfigReader {
 
     public String getUpdateCase() {
         return this.UpdateCase;
+    }
+
+    public String getDbPort() {
+        return this.dbPort;
+    }
+
+    public String getDb() {
+        return this.db;
+    }
+
+    public String getSendEmailAfterExecution() {
+        return this.SendEmailAfterExecution;
     }
 
 }

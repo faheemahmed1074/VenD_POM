@@ -1,35 +1,39 @@
 package general;
 
-import org.apache.commons.io.FileUtils;
+import org.aspectj.util.FileUtil;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static general.MainCall.webDriverFactory;
+
 public class Screenshots {
     public static File screenShot;
+    public static  String filePath;
+
     public static final String takeScreenshot(String test) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_hh-mm-ss"); //colon removed, windows not support colon
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_hh-mm-ss"); //windows not support colon (Bug fixing for windows users)
         Calendar now = Calendar.getInstance();
 
-        String filePath = System.getProperty("user.dir") + "/screenshots/" + test + "_" + formatter.format(now.getTime())+".jpg";
+        screenShot  = ((TakesScreenshot)webDriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
+
+        filePath = System.getProperty("user.dir") + "/screenshots/" + test + "_" + formatter.format(now.getTime())+".jpg";
 
         try {
-            File scrFile = ((TakesScreenshot)WebDriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(scrFile, new File(filePath));
+            FileUtil.copyFile(screenShot, new File(filePath));
         } catch (IOException e) {
-            filePath = "Failed to capture screenshot: " + e.getMessage();
             e.printStackTrace();
         }
 
-       filePath = filePath.replace(System.getProperty("user.dir"), "..");
+        filePath = filePath.replace(System.getProperty("user.dir"), "..");
         return filePath;
-    }
 
+    }
     public static String getScreenshot(String screenshotName) throws Exception {
         String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) WebDriverFactory.getDriver();
@@ -39,7 +43,7 @@ public class Screenshots {
         String destination = System.getProperty("user.dir") + "/FailedTestsScreenshots/" + screenshotName + dateName + ".jpg";
 
         File finalDestination = new File(destination);
-        FileUtils.copyFile(source, finalDestination);
+        FileUtil.copyFile(source, finalDestination);
 
         return destination;
     }
