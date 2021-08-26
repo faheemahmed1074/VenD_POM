@@ -1,66 +1,45 @@
 # automation
 
-Pre-requisites:
+###### Pre-requisites:
   - Java JDK 8 should be installed
   - JAVA_HOME environment variable should be set
 
-Steps to setup:
-  - Clone repo: https://github.com/zglue/automation.git
+###### Steps to setup:
+  - Clone repo: https://bitbucket.org/venturedive/web-automation-framework/src/master/
   - Open project on IntelliJ through pom.xml file
   - Checkout develop branch
       - Git checkout -f develop
 
-Steps to execute script:
-  - Right click TestSuite1.xml and Run it
+###### Application Configuration File setup:
+- Test Trail Integration: set LogTestRail = true  
+- jira Integration: set LogJIRA = true
+- Send Report through Email: SendEmailAfterExecution = True
+
+###### Steps to execute script:
+  - Right click testng.xml and Run it
   - Wait for full execution
   - After execution is completed, open /reports/ExtentReport.html on Chrome browser to view results
 
-Setup of Jenkins Locally:
-Jenkins setup: 
-  * Tutorial link: https://www.guru99.com/download-install-jenkins.html
-  - Click on Manage Jenkins
-  - Click on Global Tool Configuration
-  - Under Maven, add Name (“mvnLatest”) and check Install automatically
-  - Click on Apply and then Save 
-  
-  Framework Understanding Video:
+###### Framework Understanding Video:
+
   https://drive.google.com/drive/folders/0BwmieK6G4SFUfm9jMVBGd3YtSlFMVExTV3ZVOTlrOUszcjBMUXRrX1ZGNkotNnowRnNHSGM
-  
-  Reports created under Report folder, sample report provided under report folder
-  
-# automation
 
-Pre-requisites:
-  - Java JDK 8 should be installed
-  - JAVA_HOME environment variable should be set
+###### Setup of Percy:
 
-Steps to setup:
-  - Clone repo: https://github.com/zglue/automation.git
-  - Open project on IntelliJ through pom.xml file
-  - Checkout develop branch
-      - Git checkout -f develop
+- Login to percy.io
+- Create New project on Percy
+- Integrate Github or Bitbucket with your repository
+- Get Percy token and export in local machine
+- Execute test cases using "npx percy exec -- mvn test"
 
-Steps to execute script:
-  - Right click TestSuite1.xml and Run it
-  - Wait for full execution
-  - After execution is completed, open /reports/ExtentReport.html on Chrome browser to view results
+###### Code Structure:
+1- all test cases are in _src/main/java/testcases_ 
 
-Setup of Jenkins Locally:
-Jenkins setup: 
-  * Tutorial link: https://www.guru99.com/download-install-jenkins.html
-  - Click on Manage Jenkins
-  - Click on Global Tool Configuration
-  - Under Maven, add Name (“mvnLatest”) and check Install automatically
-  - Click on Apply and then Save 
-  
-  Framework Understanding Video:
-  https://drive.google.com/drive/folders/0BwmieK6G4SFUfm9jMVBGd3YtSlFMVExTV3ZVOTlrOUszcjBMUXRrX1ZGNkotNnowRnNHSGM
-  
-  Reports created under Report folder, sample report provided under report folder
-  
-Setup of Percy:
-   - Login to percy.io
-   - Create New project on Percy
-   - Integrate Github or Bitbucket with your repository 
-   - Get Percy token and export in local machine 
-   - Execute test cases using "npx percy exec -- mvn test"
+2- all pages object are in _src/main/java/objects_
+
+3- all classes i.e base class (hooks), main class etc are in _src/main/java/general_
+
+4- db connection class define in _src/main/java/dbConnection_
+
+5- all application configuration are in _src/main/java/config_
+

@@ -13,31 +13,37 @@ public class WebDriverWaits {
     private static WebDriver jsWaitDriver;
     private static WebDriverWait jsWait;
     private static JavascriptExecutor jsExec;
-    public static WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(),20);
+    public static WebDriverWait wait ;
 
 
-    public static WebElement waitUntilElementIsClickable( WebElement webElement)
+    public static WebElement waitUntilElementIsClickable(By locator)
     {
-        webElement = wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
+        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
         return webElement;
     }
 
-    public static void visibilityOf(WebElement element){
-         wait.until(ExpectedConditions.visibilityOf(element));
+    public static void visibilityOf(By element){
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
     }
 
     public static void invisibilityOf(By locator){
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
          wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
     public static void visibilityOfMainBoard(){
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
          wait.until(ExpectedConditions.visibilityOf(WebDriverFactory.getDriver().findElement(By.id("mainboard"))));
     }
     public static void visibilityOfSchematicView(){
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
          wait.until(ExpectedConditions.visibilityOf(WebDriverFactory.getDriver().findElement(By.id("schematicView"))));
     }
 
     public static WebElement waitUntilElementNotDisplayed(final WebElement webElement) {
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
         WebDriverWait wait = new WebDriverWait(WebDriverFactory.getDriver(), TIMEOUT);
         ExpectedCondition elementIsDisplayed = new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver arg0) {
@@ -56,6 +62,7 @@ public class WebDriverWaits {
 
 
     public static void waitForPageReadyByJquery() {
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
         int counter = 0;
         if(!(Boolean) ((JavascriptExecutor) WebDriverFactory.getDriver()).executeScript("return (window.jQuery != null) && (jQuery.active === 0);"))
         {
@@ -69,10 +76,12 @@ public class WebDriverWaits {
     }
 
     public static void waitUntilElementVisible(){
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
         new WebDriverWait(WebDriverFactory.getDriver(), 50).until(ExpectedConditions.invisibilityOfElementLocated(By.className("vj-animated-svg-icon"))); // wait for Loading panel to close
     }
 
     public static void waitUntilLoaderDisapears(){
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
         WebElement loader = WebDriverFactory.getDriver().findElement(By.className("spinner-wrapper"));
 
         while(loader.getAttribute("style").contains("block")){
@@ -81,11 +90,13 @@ public class WebDriverWaits {
     }
 
     public static void waitUntilRoleSelected(WebElement role){
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
 //        wait.until(ExpectedConditions.attributeContains(role, "class", "SettingsButton-ListItem"));
         wait.until(ExpectedConditions.elementSelectionStateToBe(role, true));
     }
 
     public static void sleep(int time){
+
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
@@ -121,6 +132,7 @@ public class WebDriverWaits {
 
 
     public static WebElement waitFor(ExpectedCondition<WebElement> webElementExpectedCondition) {
+        wait =new WebDriverWait(WebDriverFactory.getDriver(),20);
 
         return wait.until(webElementExpectedCondition);
     }

@@ -1,1 +1,8 @@
-.idea/workspace.xml
+
+/screenshots/
+/recordings/**
+
+
+/.idea/
+/reports/**
+/target/

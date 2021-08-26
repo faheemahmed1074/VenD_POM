@@ -33,16 +33,16 @@
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.3.0.603</version>
             </plugin>
-
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
+
+
         </plugins>
     </build>
 
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.45.0</version>
+            <version>3.141.59</version>
         </dependency>
 
         <dependency>
@@ -58,19 +58,23 @@
             <artifactId>testng</artifactId>
             <version>6.9.10</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+        </dependency>
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
             <version>2.7.2</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>3.11-beta2</version>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>1.6.2</version>
         </dependency>
+
 
         <dependency>
             <groupId>io.appium</groupId>
@@ -116,23 +120,17 @@
             <version>2.0.RC6</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>WebAutomation</groupId>-->
-            <!--<artifactId>WebAutomation</artifactId>-->
-            <!--<version>1.0-SNAPSHOT</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.8.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.galenframework</groupId>
-            <artifactId>galen-java-support</artifactId>
-            <version>2.4.4</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.galenframework</groupId>-->
+<!--            <artifactId>galen-java-support</artifactId>-->
+<!--            <version>2.4.4</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.github.stephenc.monte</groupId>
@@ -205,18 +203,10 @@
             <artifactId>java-dotenv</artifactId>
             <version>3.0.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.venturedive</groupId>-->
-<!--            <artifactId>testrail-integration</artifactId>-->
-<!--            <version>4.0-SNAPSHOT</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/Resource/com.venturedive-testrail-integration-4.0-SNAPSHOT.jar</systemPath>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>com.venturedive</groupId>
             <artifactId>testrail-integration</artifactId>
-            <version>6.4-SNAPSHOT</version>
+            <version>8.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>net.rcarz</groupId>
@@ -232,18 +222,29 @@
         <dependency>
             <groupId>io.percy</groupId>
             <artifactId>percy-java-selenium</artifactId>
-            <version>0.1.4</version>
+            <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>4.2.2</version>
-            <scope>test</scope>
-        </dependency>
+
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>4.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mailapi</artifactId>
+            <version>1.4.3</version>
         </dependency>
 
     </dependencies>
