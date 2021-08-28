@@ -1,5 +1,6 @@
 package objects;
 
+import general.CommonAssertions;
 import general.MainCall;
 import general.WebDriverFactory;
 import org.openqa.selenium.By;
@@ -34,11 +35,13 @@ public class LoginPage
     public static By byGotItButton = By.className("cc-btn");
     public static By byButtonScroll = By.xpath("//a[text()='Discuss on Helpdesk']");
     public static By bySelector = By.className("pickListSelect");
-    public static By byAdd = By.className("pAdd");
+    public static By byAdd = By.className("pAdds");
 
     public void enterUserDetails(String userMail, String pwd) {
+        CommonAssertions.logActualReult("enter the username");
         MainCall.logHelper.logStep("User enters email and password");
         MainCall.webDriverFactory.getDriver().findElement(byEmail).sendKeys(userMail);
+        CommonAssertions.logExpectedResult("email should be display on text box");
         MainCall.webDriverFactory.getDriver().findElement(byPassword).sendKeys(pwd);
     }
 

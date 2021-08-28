@@ -150,6 +150,7 @@ public class BaseTest extends LogHelper {
            TestRail.createSuite();
            TestRail.updateTestRail();
            TestRail.AttachImagesWithTestResults(screenShotCollection);
+
         }
     }
 
