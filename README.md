@@ -1,21 +1,28 @@
-# automation
+# Web Automation
 
 ###### Pre-requisites:
   - Java JDK 8 should be installed
   - JAVA_HOME environment variable should be set
+  -  Maven 3.6 version should be installed
+  - Maven environment variable should be set
+  - Restart the system after completing the above steps
 
 ###### Steps to setup:
   - Clone repo: https://bitbucket.org/venturedive/web-automation-framework/src/master/
-  - Open project on IntelliJ through pom.xml file
-  - Checkout develop branch
-      - Git checkout -f develop
+  - Create your own branch
+  - Open project on IntelliJ
+  - Open terminal and run command
+    - mvn clean test
+    - git pull
+  - Checkout your created branch
+    - git checkout origin/yourbranchname
 
 ###### Application Configuration File setup:
 - Test Trail Integration: set LogTestRail = true  
 - jira Integration: set LogJIRA = true
 - Send Report through Email: SendEmailAfterExecution = True
 
-###### Steps to execute script:
+ ###### Steps to execute script:
   - Right click testng.xml and Run it
   - Wait for full execution
   - After execution is completed, open /reports/ExtentReport.html on Chrome browser to view results
