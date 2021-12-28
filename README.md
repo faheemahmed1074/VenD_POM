@@ -11,7 +11,7 @@
   - Clone repo: https://bitbucket.org/venturedive/web-automation-framework/src/master/
   - Create your own branch
   - Open project on IntelliJ
-  - Open terminal and run command
+  - Open terminal and run command.
     - mvn clean test
     - git pull
   - Checkout your created branch
