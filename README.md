@@ -1,21 +1,40 @@
-# automation
+# Web Automation
 
 ###### Pre-requisites:
-  - Java JDK 8 should be installed
-  - JAVA_HOME environment variable should be set
+- Java JDK 8 should be installed by using the url https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html
+- JAVA_HOME environment variable should be set
+- Android Studio should be installed by using the url https://developer.android.com/studio
+- ANDROID_HOME environment variable should be set
+- Maven 3.6 version should be installed by using the url https://dlcdn.apache.org/maven/maven-3/3.6.3/binaries/
+- Maven environment variable should be set
+- Restart the system after completing the above steps
 
 ###### Steps to setup:
   - Clone repo: https://bitbucket.org/venturedive/web-automation-framework/src/master/
-  - Open project on IntelliJ through pom.xml file
-  - Checkout develop branch
-      - Git checkout -f develop
+    - On GitHub.com, navigate to the main page of the repository. 
+    - To clone your repository, click on the copy icon
+    - Open Git Bash.
+    - Change the current working directory to the location where you want the cloned directory.
+    - Type git clone, and then paste the URL you copied earlier.
+    - $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+    - Press Enter to create your local clone.
+  - Create your own branch
+    - Click on Branches Tab in Bitbucket
+    - Click on Create branch
+    - Type your branch name and click on create
+  - Open project on IntelliJ
+  - Open terminal and run command.
+    - mvn clean test
+    - git pull
+  - Checkout your created branch
+    - git checkout origin/yourbranchname
 
 ###### Application Configuration File setup:
 - Test Trail Integration: set LogTestRail = true  
 - jira Integration: set LogJIRA = true
 - Send Report through Email: SendEmailAfterExecution = True
 
-###### Steps to execute script:
+ ###### Steps to execute script:
   - Right click testng.xml and Run it
   - Wait for full execution
   - After execution is completed, open /reports/ExtentReport.html on Chrome browser to view results
