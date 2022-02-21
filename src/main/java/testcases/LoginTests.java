@@ -9,15 +9,15 @@ public class LoginTests extends BaseTest {
 
     @Test(description = "225371")
     public static void loginIntoApplication() throws InterruptedException, SQLException {
-        MainCall.dbConn.getValueFromColumn("select platform , Build , Project_Name from automation_report ar  where Project_Name LIKE '%Epharma%' AND Platform ='Web' order by id DESC limit 1;");
-        MainCall.logHelper.logStep("User is logged in successfully");
+        //MainCall.dbConn.getValueFromColumn("select platform , Build , Project_Name from automation_report ar  where Project_Name LIKE '%Epharma%' AND Platform ='Web' order by id DESC limit 1;");
+        MainCall.log.logInfo("User is logged in successfully");
         MainCall.genericFunctions.assertion(1,1);
         MainCall.genericFunctions.PercyCapture("loginIntoApplication");
     }
 
 //    @Test(description = "Sign Up")
     public static void signApplication() throws InterruptedException{
-        MainCall.logHelper.logStep("User sign up");
+        MainCall.log.logInfo("User sign up");
         MainCall.loginPage.selectNewUser();
         MainCall.loginPage.fillSignUp();
         MainCall.loginPage.selectSignUpSumbit();
@@ -25,13 +25,13 @@ public class LoginTests extends BaseTest {
 
 //    @Test(description = "Forget/Reset Password")
     public static void forgetPassword() throws InterruptedException{
-        MainCall.logHelper.logStep("User reset passowrd");
+        MainCall.log.logInfo("User reset passowrd");
         MainCall.loginPage.selectForgetPassword();
         MainCall.loginPage.enterEmail(EnvGlobals.email);
         MainCall.loginPage.selectForgetPasswordSumbit();
     }
 
-    @Test (description = "225371")
+    @Test (description = "224711")
     public static void Scrolling() throws InterruptedException {
         MainCall.genericFunctions.driverStart("https://webkul.com/blog/how-to-scroll-in-a-specific-element-using-selenium-webdriver/");
         MainCall.webDriverWaits.sleep(5000);

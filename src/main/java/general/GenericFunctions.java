@@ -2,7 +2,6 @@ package general;
 
 
 import com.mysql.cj.exceptions.AssertionFailedException;
-import jdk.jfr.internal.tool.Main;
 import objects.CommonLocators;
 import io.percy.selenium.Percy;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -129,7 +128,7 @@ public class GenericFunctions {
     }
 
     public static void PercyCapture(String Name) throws InterruptedException {
-        Percy percy = new Percy(WebDriverFactory.getDriver());
+        Percy percy = new Percy(MainCall.webDriverFactory.getDriver());
         Thread.sleep(2000);
         percy.snapshot(Name);
         Thread.sleep(2000);

@@ -21,16 +21,16 @@ public class TestBase {
         randList = GenericFunctions.generateRandomNumSystem(5, sysCount);
         String name = "";
 
-        TestPage.getSystems();
+//        TestPage.getSystems();
+//
+//        data();
+//
+//        for (int i=0 ; i<sysCount ; i++) {
+//            name = "AutoSystem" + i;
+//            sysNames.add(name + "_" + randList.get(i));
 
-        data();
+            TestPage.saveAsSystems("sys", "3" ,3);
 
-        for (int i=0 ; i<sysCount ; i++) {
-            name = "AutoSystem" + i;
-            sysNames.add(name + "_" + randList.get(i));
-
-            TestPage.saveAsSystems(name, sysNames.get(i), sysId.get(i));
-        }
     }
 
     public static void data(){

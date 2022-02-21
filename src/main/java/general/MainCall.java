@@ -7,7 +7,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
 import preReq.TestPage;
-import utils.LogHelper;
+
 
 import java.io.File;
 import java.sql.SQLException;
@@ -44,11 +44,10 @@ public class MainCall {
     public final static EnvGlobals envGlobals = new EnvGlobals();
     public final static WebDriverFactory webDriverFactory = new WebDriverFactory();
     public final static TrainingSessionPage trainingSessionPage = new TrainingSessionPage();
-    public final static LogHelper logHelper = new LogHelper();
     public final static WebDriverWaits webDriverWaits = new WebDriverWaits();
     public final static DbConn dbConn = new DbConn();
-    public final static TestPage preReq = new TestPage();
-
+    public final static TestBase preReq = new TestBase();
+    public final static CommonAssertions log = new CommonAssertions();
 
     public static ExtentReports getExtentReport()
     {
@@ -64,18 +63,12 @@ public class MainCall {
         RestAssured.baseURI = BaseURI;
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL);
         RestAssured.useRelaxedHTTPSValidation();
-
         TestBase.setup();
     }
 
 
     public static void restAssuredPreReq() {
-        //baseTest.REQUEST = RestAssured.given().baseUri(coreBaseUrl);
-        //RestAssured.baseURI = baseUrl;
-        //RestAssured.port = Integer.valueOf(Port);
-        //REQUEST = RestAssured.given().contentType(ContentType.JSON);
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails(LogDetail.ALL);
-        //  BasicConfigurator.configure();
 
     }
 

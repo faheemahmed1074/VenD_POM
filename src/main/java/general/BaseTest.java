@@ -2,18 +2,14 @@ package general;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import com.venturedive.base.config.BaseConfigProperties;
 import com.venturedive.base.database.connection.SonarDB;
 import com.venturedive.base.exception.APIException;
 import com.venturedive.base.utility.JIRA;
 
 import static config.ConfigProperties.*;
-import static general.EnvGlobals.Differnce;
 
-import com.venturedive.base.utility.JIRA;
 import com.venturedive.base.utility.SendEmailAfterExecution;
 import com.venturedive.base.utility.TestRail;
-import dbConnection.DbConn;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -21,7 +17,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import utils.LogHelper;
+
 
 import javax.mail.MessagingException;
 import java.awt.*;
@@ -34,11 +30,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
-public class BaseTest extends LogHelper {
+public class BaseTest  {
 
     ExtentTest logger;
-
-    boolean chipUpdateQuery = false;
 
     //    For Reporting to insert into database
     static Date startTime = null;
@@ -48,7 +42,6 @@ public class BaseTest extends LogHelper {
     static Integer skippedCount = 0;
 
     SonarDB dbconn= new SonarDB();
-
     //    For Reporting to insert into database
     static ArrayList<String> automationSteps;
     static Integer beforeAddingStepsLength;
@@ -61,9 +54,10 @@ public class BaseTest extends LogHelper {
 
     @BeforeSuite
     public void beforesuite(ITestContext ctx) throws SQLException, IOException, AWTException, APIException {
-
-        //for pre request apis
-        MainCall.preReq.saveAsSystems("test","3",3);
+        // connec Databse and Run the Query
+        MainCall.dbConn.getValueFromColumn("select * from sonardb.automation_report where id =270926;");
+        //PreReq Setup
+        MainCall.preReq.setup();
         startReport();
         if(IsEnableRecording.equals("true"))
             Recorder.deleteRecordings();
@@ -137,10 +131,7 @@ public class BaseTest extends LogHelper {
     public void tearDown() throws SQLException, APIException, IOException, MessagingException {
         endTime = getTime();
         dbconn.insertReportingDataIntoDB(startTime, passedCount, failedCount, skippedCount, startTime, endTime); //need to open after jira integration
-        if(IsSendEmailAfterExecution.equals("True")) {
-            System.out.println("sendEmail");
-            SendEmailAfterExecution.sendReportAfterExecution(passedCount, failedCount, skippedCount);
-        }
+        SendEmailAfterExecution.sendReportAfterExecution(passedCount, failedCount, skippedCount);
         MainCall.webDriverFactory.finishDriver();
         if(IsEnableReporting.equals("true")) {
             MainCall.getExtentReport().flush();
@@ -150,7 +141,6 @@ public class BaseTest extends LogHelper {
            TestRail.createSuite();
            TestRail.updateTestRail();
            TestRail.AttachImagesWithTestResults(screenShotCollection);
-
         }
     }
 

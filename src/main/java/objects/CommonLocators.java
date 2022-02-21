@@ -11,8 +11,6 @@ import java.awt.event.KeyEvent;
 
 import static general.WebDriverFactory.action;
 import static general.WebDriverFactory.robot;
-import static utils.LogHelper.logStep;
-
 
 public class CommonLocators {
     public CommonLocators(){}
@@ -55,7 +53,6 @@ public class CommonLocators {
 
 
     public void fileSelectionForMac(String path) throws AWTException, InterruptedException {
-        logStep("User searches and selects file to import");
 
         String dir = System.getProperty("user.dir");
         StringSelection StringSelection = new StringSelection(dir + path);

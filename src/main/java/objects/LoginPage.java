@@ -33,13 +33,13 @@ public class LoginPage
     public static By byButton = By.tagName("button");
     public static By bySpan = By.tagName("span");
     public static By byGotItButton = By.className("cc-btn");
-    public static By byButtonScroll = By.xpath("//a[text()='Discuss on Helpdesk']");
+    public static By byButtonScroll = By.xpath("//a[text()='Discuss on Helpdesks']");
     public static By bySelector = By.className("pickListSelect");
     public static By byAdd = By.className("pAdds");
 
     public void enterUserDetails(String userMail, String pwd) {
         CommonAssertions.logActualReult("enter the username");
-        MainCall.logHelper.logStep("User enters email and password");
+        MainCall.log.logInfo("User enters email and password");
         MainCall.webDriverFactory.getDriver().findElement(byEmail).sendKeys(userMail);
         CommonAssertions.logExpectedResult("email should be display on text box");
         MainCall.webDriverFactory.getDriver().findElement(byPassword).sendKeys(pwd);
@@ -56,29 +56,29 @@ public class LoginPage
     }
 
     public void clickLogin(){
-        MainCall.logHelper.logStep("User clicks on Login button");
+        MainCall.log.logInfo("User clicks on Login button");
         WebElement elements = MainCall.webDriverFactory.getDriver().findElement(byLogin);
         elements.click();
     }
 
     public void clickLoginOnWelcomeScreen(){
-        MainCall.logHelper.logStep("User clicks on Login in Welcome Screen");
+        MainCall.log.logInfo("User clicks on Login in Welcome Screen");
 
         if (Url.contains("localhost"))
             MainCall.webDriverFactory.getDriver().findElement(byLoginWelcome).click();
     }
     public void verifyWelcomeScreen(){
-        MainCall.logHelper.logStep("Verify Welcome Screen");
+        MainCall.log.logInfo("Verify Welcome Screen");
         MainCall.webDriverFactory.getDriver().findElement(byLoginWelcome).click();
     }
 
     public void selectHelpPopUpCross(){
-        MainCall.logHelper.logStep("User clicks on cross on help popup");
+        MainCall.log.logInfo("User clicks on cross on help popup");
         MainCall.webDriverFactory.getDriver().findElement(byHelpPopUpCross).click();
     }
 
     public void selectSkipButton(){
-        MainCall.logHelper.logStep("User clicks on Skip button");
+        MainCall.log.logInfo("User clicks on Skip button");
         if (MainCall.webDriverFactory.getDriver().getPageSource().contains("title=\"Skip\"")){
             MainCall.genericFunctions.assertionToDisplayed(bySkip);
             MainCall.webDriverFactory.getDriver().findElement(bySkip).click();
