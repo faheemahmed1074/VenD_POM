@@ -16,19 +16,10 @@ public class ConfigProperties {
 
     public static String IsEnableReporting = appConfig.getIsEnableReporting();
     public static String IsEnableRecording = appConfig.getIsEnableRecording();
-
-    public static String dbName = appConfig.getDbName();
-    public static String dbUrl = appConfig.getDbUrl();
-    public static String dbUsername = appConfig.getDbUsername();
-    public static String dbPassword = appConfig.getDbPassword();
-
     public static String LogTestRail = appConfig.getLogTestRail();
     public static String LogJIRA = appConfig.getLogJIRA();
     public static String UpdateCase = appConfig.getUpdateCase();
     public static String TemplateId = appConfig.getTemplateId();
-    public static String IsSendEmailAfterExecution = appConfig.getSendEmailAfterExecution();
-    public static String db = appConfig.getDb();
-    public static String dbPort = appConfig.getDbPort();
 
 
 }

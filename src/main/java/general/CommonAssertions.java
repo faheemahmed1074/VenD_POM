@@ -15,7 +15,7 @@ public class CommonAssertions {
     private   static org.apache.log4j.Logger log= org.apache.log4j.Logger.getLogger(Logger.class);
 
     public String log4jConfigFile = System.getProperty("user.dir")
-            + File.separator + "log4j.xml";
+            + File.separator + "log4j2.xml";
 
     public CommonAssertions()
     {

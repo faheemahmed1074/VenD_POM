@@ -50,26 +50,8 @@ public class ApplicationConfigReader {
 
 /*############################ --- Environment --- ############################*/
 
-    @Property("dbName")
-    private String dbName = "";
 
-    @Property("dbUrl")
-    private String dbUrl = "";
 
-    @Property("dbUsername")
-    private String dbUsername = "";
-
-    @Property("dbPassword")
-    private String dbPassword = "";
-
-    @Property("SendEmailAfterExecution")
-    private String SendEmailAfterExecution = "";
-
-    @Property("dbPort")
-    private String dbPort = "";
-
-    @Property("db")
-    private String db = "";
 
 
     public ApplicationConfigReader() {
@@ -110,14 +92,6 @@ public class ApplicationConfigReader {
     public String getIsEnableRecording() { return this.isEnableRecording; }
 
 
-    public String getDbName() {
-        return dbName;
-    }
-    public String getDbUrl() {
-        return dbUrl;
-    }
-    public String getDbUsername() { return dbUsername; }
-    public String getDbPassword() { return dbPassword; }
     public String getLogTestRail() { return LogTestRail; }
 
 
@@ -132,16 +106,6 @@ public class ApplicationConfigReader {
         return this.UpdateCase;
     }
 
-    public String getDbPort() {
-        return this.dbPort;
-    }
 
-    public String getDb() {
-        return this.db;
-    }
-
-    public String getSendEmailAfterExecution() {
-        return this.SendEmailAfterExecution;
-    }
 
 }
