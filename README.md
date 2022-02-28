@@ -29,6 +29,73 @@
   - Checkout your created branch
     - git checkout origin/yourbranchname
 
+___
+#
+###### Pre-requisites (Ubuntu):
+
+1) Java JDK 8 should be installed by using the following commands:
+
+   - `sudo apt install openjdk-8-jdk`
+
+
+2) Verify that the same version is installed
+
+   - `java -version`
+
+
+3) JAVA_HOME environment variable should be set
+   - `export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64`
+
+  
+4) Verify that the variable is set
+   - `echo $PATH`
+
+    
+5) Maven 3.6 version should be installed by using the following commands
+   - `sudo apt install maven`
+   - `sudo apt update`
+  
+
+6) To verify the installation, run
+   - `mvn -version`
+  
+
+7) **_'settings.xml'_** file is required
+
+
+8) Copy and paste the file **_'settings.xml'_** in **_'.m2'_** folder. You can find the **_'.m2'_** on Home by enabling **_'Show Hidden Files'_** option
+
+
+9) Install Git from the following command
+   - `sudo apt install git`
+  
+  
+10) Restart the system after completing the above steps
+ #
+###### Steps to setup (Ubuntu):
+
+- Clone repo: https://bitbucket.org/venturedive/web-automation-framework/src/master/
+    - On Bitbucket.com, navigate to the main page of the repository.
+    - To clone your repository, click on the copy icon
+    - Go to the location where you want to clone the repository
+    - Make a folder and open it.
+    - Right click and open Terminal in that folder
+    - Type git clone, and then paste the URL you copied earlier.
+    - $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+    - Press Enter to create your local clone.
+- Create your own branch
+    - Click on Branches Tab in Bitbucket
+    - Click on Create branch
+    - Type your branch name and click on create
+- Open project on IntelliJ
+- Open terminal and run command.
+    - mvn clean test
+    - git pull
+- Checkout your created branch
+    - git checkout origin/yourbranchname
+
+___
+#
 ###### Application Configuration File setup:
 - Test Trail Integration: set LogTestRail = true  
 - jira Integration: set LogJIRA = true
