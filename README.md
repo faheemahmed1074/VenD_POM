@@ -62,3 +62,29 @@
 
 5- all application configuration are in _src/main/java/config_
 
+###### DataBase Connection
+
+db =
+
+dbUrl=
+
+dbUserName=
+
+dbPassword=2
+
+dbPort =
+
+1-for mysql db set **db=mysql** 
+
+2-for postgres db set **db=postgres**
+
+3-import venture dive jar in POM
+
+4-initialize sonar db class  i.e **SonarDB dbconn= new SonarDB();**
+
+5- use **dbconn.getResult(String query)** for select query return the resultSet
+
+6- use **dbconn.executeQuery(String query)** for update query , delete and insert query
+
+
+

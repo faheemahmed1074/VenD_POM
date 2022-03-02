@@ -7,6 +7,7 @@ import com.venturedive.base.exception.APIException;
 import com.venturedive.base.utility.JIRA;
 
 import static config.ConfigProperties.*;
+import static general.MainCall.dbAction;
 
 import com.venturedive.base.utility.SendEmailAfterExecution;
 import com.venturedive.base.utility.TestRail;
@@ -24,6 +25,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,9 +56,12 @@ public class BaseTest  {
 
     @BeforeSuite
     public void beforesuite(ITestContext ctx) throws SQLException, IOException, AWTException, APIException {
-        // connec Databse and Run the Query
-        MainCall.dbConn.getValueFromColumn("select * from sonardb.automation_report where id =270926;");
-        //PreReq Setup
+
+        //Example For DataBase
+        dbAction.selectQuery();
+        dbAction.updateQuery();
+        dbAction.deleteQuery();
+        //Pre Req Api
         MainCall.preReq.setup();
         startReport();
         if(IsEnableRecording.equals("true"))

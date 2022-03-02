@@ -1,12 +1,11 @@
 package general;
 
-import dbConnection.DbConn;
+import database.DBActions;
 import objects.*;
 import preReq.TestBase;
 import com.relevantcodes.extentreports.ExtentReports;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
-import preReq.TestPage;
 
 
 import java.io.File;
@@ -45,9 +44,10 @@ public class MainCall {
     public final static WebDriverFactory webDriverFactory = new WebDriverFactory();
     public final static TrainingSessionPage trainingSessionPage = new TrainingSessionPage();
     public final static WebDriverWaits webDriverWaits = new WebDriverWaits();
-    public final static DbConn dbConn = new DbConn();
+    public final static DBActions dbAction = new DBActions();
     public final static TestBase preReq = new TestBase();
     public final static CommonAssertions log = new CommonAssertions();
+
 
     public static ExtentReports getExtentReport()
     {
