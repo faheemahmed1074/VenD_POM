@@ -1,17 +1,26 @@
 package objects;
 
+
+
 import general.CommonAssertions;
 import general.MainCall;
 import general.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static com.venturedive.base.config.BaseConfigProperties.projectName;
 import static config.ConfigProperties.Url;
 import static config.ConfigProperties.appConfig;
 
 public class LoginPage
 {
     public LoginPage() {}
-
+    public static String selectQuery = "select * from sonardb.automation_report where id =270926;";
+    public static String updateQuery = "update sonardb.automation_report set PROJECT_NAME = 'Vital' where PROJECT_NAME = 'Vital'";
+    public static String deleteQuery = "delete from  sonardb.automation_report where id =272947;";
     public static By byLoginWelcome = By.id("logout-link");
 
     public static By byEmail = By.name("useremail");
@@ -131,6 +140,23 @@ public class LoginPage
         MainCall.genericFunctions.selectElementFromDropDownByText(bySelector,value1);
         MainCall.genericFunctions.selectElementFromDropDownByText(bySelector,value2);
         MainCall.genericFunctions.click(byAdd);
+    }
+
+    //Example DB Integration From jar
+    public void dataBaseQuery() throws SQLException {
+        ResultSet resultSet = MainCall.dbOp.getResult(selectQuery);
+        while (resultSet.next()) {
+            projectName = resultSet.getString("PROJECT_NAME");
+            System.out.println(projectName);
+            System.out.println(resultSet.getString("Build"));
+            System.out.println(resultSet.getString("platform"));
+        }
+
+        int count  = MainCall.dbOp.executeQuery(updateQuery);
+        System.out.println(count + "  rows are updated");
+        count  = MainCall.dbOp.executeQuery(deleteQuery);
+        System.out.println(count + "  rows are deleted");
+
     }
 }
 

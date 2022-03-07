@@ -7,14 +7,14 @@ import static java.lang.Thread.sleep;
 
 public class TrainingSession extends BaseTest {
 
-    @Test(description = "124640")
+    @Test(description = "225371")
     public static void AlertWindow() throws InterruptedException {
         MainCall.genericFunctions.driverStart("https://www.seleniumeasy.com/test/bootstrap-modal-demo.html");
         MainCall.trainingSessionPage.openMultipleModalAlert();
         MainCall.genericFunctions.PercyCapture("Alert Window");
     }
 
-    @Test(description = "124640")
+    @Test(description = "225371")
     public static void Slider() throws InterruptedException
     {
         MainCall.genericFunctions.driverStart("https://www.seleniumeasy.com/test/drag-drop-range-sliders-demo.html");
@@ -24,7 +24,7 @@ public class TrainingSession extends BaseTest {
         MainCall.genericFunctions.PercyCapture("Slider");
     }
 
-    @Test(description = "124640")
+    @Test(description = "225371")
     public static void JavaScriptAlert() throws InterruptedException
     {
         MainCall.genericFunctions.driverStart("https://www.seleniumeasy.com/test/javascript-alert-box-demo.html");
