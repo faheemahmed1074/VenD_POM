@@ -15,4 +15,5 @@ public class EnvGlobals {
     public static String email = "";
     public static String password = "";
     public static String company = "";
+    public static String ProjectName = "";
 }

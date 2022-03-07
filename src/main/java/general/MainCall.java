@@ -1,11 +1,11 @@
 package general;
 
-import database.DBActions;
 import objects.*;
 import preReq.TestBase;
 import com.relevantcodes.extentreports.ExtentReports;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.LogDetail;
+import com.venturedive.base.database.connection.DbOperation;
 
 
 import java.io.File;
@@ -37,16 +37,18 @@ public class MainCall {
 
         return extent;
     }
-    public final static CommonLocators commonLocators = new CommonLocators();
     public final static LoginPage loginPage = new LoginPage();
     public final static GenericFunctions genericFunctions = new GenericFunctions();
     public final static EnvGlobals envGlobals = new EnvGlobals();
     public final static WebDriverFactory webDriverFactory = new WebDriverFactory();
     public final static TrainingSessionPage trainingSessionPage = new TrainingSessionPage();
     public final static WebDriverWaits webDriverWaits = new WebDriverWaits();
-    public final static DBActions dbAction = new DBActions();
+    public final static  DbOperation dbOp = new DbOperation();
     public final static TestBase preReq = new TestBase();
     public final static CommonAssertions log = new CommonAssertions();
+
+
+
 
 
     public static ExtentReports getExtentReport()

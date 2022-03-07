@@ -9,7 +9,8 @@ public class LoginTests extends BaseTest {
 
     @Test(description = "225371")
     public static void loginIntoApplication() throws InterruptedException, SQLException {
-        //MainCall.dbConn.getValueFromColumn("select platform , Build , Project_Name from automation_report ar  where Project_Name LIKE '%Epharma%' AND Platform ='Web' order by id DESC limit 1;");
+        //DB base Query Example
+        MainCall.loginPage.dataBaseQuery();
         MainCall.log.logInfo("User is logged in successfully");
         MainCall.genericFunctions.assertion(1,1);
         MainCall.genericFunctions.PercyCapture("loginIntoApplication");
