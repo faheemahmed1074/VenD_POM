@@ -57,7 +57,7 @@ public class BaseTest  {
     @BeforeSuite
     public void beforesuite(ITestContext ctx) throws SQLException, IOException, AWTException, APIException {
 
-      //  MainCall.preReq.setup();
+        MainCall.preReq.setup();
         startReport();
         if(IsEnableRecording.equals("true"))
             Recorder.deleteRecordings();
