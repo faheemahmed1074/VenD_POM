@@ -10,6 +10,8 @@ import com.venturedive.base.database.connection.DbOperation;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import static config.ConfigProperties.BaseURI;
 import static config.ConfigProperties.Environment;
@@ -17,6 +19,7 @@ import static config.ConfigProperties.Environment;
 public class MainCall {
 
     static ExtentReports extent;
+    public final static String reportPath = System.getProperty("user.dir") + "\\reports\\ExtentReport-"+ new SimpleDateFormat("yyyy-MM-dd'T'HH-mm-ss").format(Calendar.getInstance().getTime())+".html";
 
 
     public static ExtentReports startReport()

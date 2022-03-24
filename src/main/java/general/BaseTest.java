@@ -4,10 +4,12 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.venturedive.base.database.connection.SonarDB;
 import com.venturedive.base.exception.APIException;
+import com.venturedive.base.model.ExecutionStats;
 import com.venturedive.base.utility.JIRA;
 
 import static config.ConfigProperties.*;
 
+import com.venturedive.base.utility.MessagesIntegration;
 import com.venturedive.base.utility.SendEmailAfterExecution;
 import com.venturedive.base.utility.TestRail;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -139,6 +141,18 @@ public class BaseTest  {
            TestRail.createSuite();
            TestRail.updateTestRail();
            TestRail.AttachImagesWithTestResults(screenShotCollection);
+        }
+
+        ExecutionStats executionStats = new ExecutionStats();
+        executionStats.passed = passedCount;
+        executionStats.failed = failedCount;
+        executionStats.skipped = skippedCount;
+        executionStats.reportURL = MainCall.reportPath;
+        executionStats.executionDateTime = endTime;
+        try {
+            MessagesIntegration.sendStatsToWorkspace(executionStats);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
