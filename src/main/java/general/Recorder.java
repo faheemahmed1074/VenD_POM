@@ -70,11 +70,10 @@ public class Recorder extends ScreenRecorder {
     public static void deleteRecordings(){
         File directory = new File("./recordings/");
         File[] files = directory.listFiles();
-
-//        if (files.length > 0){
+        if (directory.exists()){
             for (File file : files){
                 file.delete();
             }
-//        }
+        }
     }
 }

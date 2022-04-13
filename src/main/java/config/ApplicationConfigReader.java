@@ -39,14 +39,7 @@ public class ApplicationConfigReader {
     @Property("isEnableRecording")
     private String isEnableRecording;
 
-    @Property("LogJIRA")
-    private String LogJIRA;
 
-    @Property("UpdateCase")
-    private String UpdateCase;
-
-    @Property("TemplateId")
-    private String TemplateId;
 
 /*############################ --- Environment --- ############################*/
 
@@ -95,16 +88,6 @@ public class ApplicationConfigReader {
     public String getLogTestRail() { return LogTestRail; }
 
 
-    public String getLogJIRA() { return LogJIRA; }
-
-
-    public String getTemplateId() {
-        return this.TemplateId;
-    }
-
-    public String getUpdateCase() {
-        return this.UpdateCase;
-    }
 
 
 
