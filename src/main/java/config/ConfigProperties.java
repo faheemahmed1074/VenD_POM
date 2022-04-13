@@ -17,9 +17,8 @@ public class ConfigProperties {
     public static String IsEnableReporting = appConfig.getIsEnableReporting();
     public static String IsEnableRecording = appConfig.getIsEnableRecording();
     public static String LogTestRail = appConfig.getLogTestRail();
-    public static String LogJIRA = appConfig.getLogJIRA();
-    public static String UpdateCase = appConfig.getUpdateCase();
-    public static String TemplateId = appConfig.getTemplateId();
+
+
 
 
 }
