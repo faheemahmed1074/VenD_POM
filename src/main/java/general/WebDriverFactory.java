@@ -6,6 +6,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.safari.SafariDriver;
+
 import java.awt.*;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -48,12 +51,27 @@ public class WebDriverFactory {
                     driver = new ChromeDriver(op);
                     break;
                 }
+
+            case "Safari":
+                driver = new SafariDriver();
+                break;
+
             case "IE":
                 driver = new InternetExplorerDriver();
                 break;
+
             case "Firefox":
+                File filef = new File("driver/geckodriver");
+                System.setProperty("webdriver.gecko.driver", filef.getAbsolutePath());
                 driver = new FirefoxDriver();
                 break;
+
+            case "Edge":
+                File file = new File("driver/msedgedriver");
+                System.setProperty("webdriver.edge.driver", file.getAbsolutePath());
+                driver = new EdgeDriver();
+                break;
+
         }
 
         driver.get(Url);
