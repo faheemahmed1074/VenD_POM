@@ -63,18 +63,6 @@ public class BaseTest  {
             Recorder.deleteRecordings();
         WebDriverManager.chromedriver().setup();
 
-        System.out.println("Test"+System.getenv("TestRailusername"));
-        System.out.println("Test"+System.getenv("sonaruser"));
-        System.out.println("Test"+System.getenv("sonarurl"));
-        System.out.println("Test"+System.getenv("sonarpwd"));
-        System.out.println("Test"+System.getenv("sonarport"));
-        System.out.println("Test"+System.getenv("JiraUsername"));
-        System.out.println("Test"+System.getenv("JiraPassword"));
-        System.out.println("Test"+System.getenv("dbUrl"));
-        System.out.println("Test"+System.getenv("dbUserName"));
-        System.out.println("Test"+System.getenv("dbPassword"));
-        System.out.println("Test"+System.getenv("dbPort"));
-
         MainCall.webDriverFactory.getInstance();
         automationSteps = new ArrayList<String>();
         expectedResults=new ArrayList<String>();
