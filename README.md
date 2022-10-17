@@ -120,7 +120,6 @@ Steps to remove crucial variables from the ApplicationConfig.properties file and
 - dbPassword=value
 ```
 - save the file
-- Remove these variables from ApplicationConfig.properties file if they exist
 
 Note*: If any variable contains # then do the following steps i.e 12#45
 
@@ -131,7 +130,6 @@ Note*: If any variable contains # then do the following steps i.e 12#45
     - export sshDbPassword="12#45"
 
 - Save the file
-- Remove these variables from ApplicationConfig.properties file if they exist
 
 Note**: Restart the PC if the framework is not able to detect updated system variables
 

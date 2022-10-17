@@ -12,14 +12,14 @@
 <!--                        <include name="ListBoxDemo"></include>-->
                     </methods>
             </class>
-<!--            <class name="testcases.TrainingSession">-->
-<!--                <methods>-->
-<!--                    <include name="AlertWindow"></include>-->
+            <class name="testcases.TrainingSession">
+                <methods>
+                    <include name="AlertWindow"></include>
 <!--                    <include name="Slider"></include>-->
-<!--&lt;!&ndash;&lt;!&ndash;                    <include name="JavaScriptAlert"></include>&ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;&lt;!&ndash;                    <include name="InputForm"></include>&ndash;&gt;&ndash;&gt;-->
-<!--                </methods>-->
-<!--            </class>-->
+<!--                    <include name="JavaScriptAlert"></include>-->
+<!--                    <include name="InputForm"></include>-->
+                </methods>
+            </class>
 
         </classes>
     </test>
