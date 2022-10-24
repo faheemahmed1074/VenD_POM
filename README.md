@@ -101,6 +101,38 @@ ___
 - jira Integration: set LogJIRA = true
 - Send Report through Email: SendEmailAfterExecution = True
 
+###### How to set the Environment Variables (Ubuntu)
+Steps to remove crucial variables from the ApplicationConfig.properties file and add them to system variables.
+
+- Open the environment Variable file by executing the below command
+  sudo -H gedit /etc/environment
+
+- Add the following variables with Value:
+```bash
+- TestRailusername=value
+- TestRailpassword=value
+- sonaruser=value
+- sonarpwd=value
+- JiraUsername=value
+- JiraPassword =value
+- FromPassword=value
+- dbUserName=value
+- dbPassword=value
+```
+- save the file
+
+Note*: If any variable contains # then do the following steps i.e 12#45
+
+- Open environment Variable file
+  sudo -H gedit /etc/profile
+
+- Add the variable with Value
+    - export sshDbPassword="12#45"
+
+- Save the file
+
+Note**: Restart the PC if the framework is not able to detect updated system variables
+
  ###### Steps to execute script:
   - Right click testng.xml and Run it
   - Wait for full execution

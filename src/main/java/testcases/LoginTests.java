@@ -14,9 +14,10 @@ public class LoginTests extends BaseTest {
         MainCall.log.logInfo("User is logged in successfully");
         MainCall.genericFunctions.assertion(1,1);
         MainCall.genericFunctions.PercyCapture("loginIntoApplication");
+
     }
 
-//    @Test(description = "Sign Up")
+    @Test(description = "Sign Up")
     public static void signApplication() throws InterruptedException{
         MainCall.log.logInfo("User sign up");
         MainCall.loginPage.selectNewUser();

@@ -62,6 +62,7 @@ public class BaseTest  {
         if(IsEnableRecording.equals("true"))
             Recorder.deleteRecordings();
         WebDriverManager.chromedriver().setup();
+
         MainCall.webDriverFactory.getInstance();
         automationSteps = new ArrayList<String>();
         expectedResults=new ArrayList<String>();
@@ -138,6 +139,7 @@ public class BaseTest  {
             MainCall.getExtentReport().close();
         }
         if (LogTestRail.equals("true")) {
+            System.out.println(LogTestRail);
            TestRail.createSuite();
            TestRail.updateTestRail();
            TestRail.AttachImagesWithTestResults(screenShotCollection);

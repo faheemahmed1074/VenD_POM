@@ -15,9 +15,9 @@
             <class name="testcases.TrainingSession">
                 <methods>
                     <include name="AlertWindow"></include>
-                    <include name="Slider"></include>
-                    <include name="JavaScriptAlert"></include>
-                    <include name="InputForm"></include>
+<!--                    <include name="Slider"></include>-->
+<!--                    <include name="JavaScriptAlert"></include>-->
+<!--                    <include name="InputForm"></include>-->
                 </methods>
             </class>
 
