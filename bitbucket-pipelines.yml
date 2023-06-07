@@ -1,0 +1,28 @@
+image: maven:3.6.3-openjdk-11
+
+definitions:
+  steps:
+    - step: &build-step
+        name: SonarQube analysis
+        caches:
+          - maven
+          - sonar
+        script:
+          - mvn verify sonar:sonar -Dsonar.projectKey=venturedive_web-automation-framework_AYiQmTCmS_rGk7Q7_W6_
+  caches:
+    sonar: ~/.sonar
+
+clone:
+  depth: full
+
+pipelines:
+  branches:
+    '{master}':
+      - step: *build-step
+
+    '{Base_code}':
+      - step: *build-step
+
+  pull-requests:
+    '**':
+      - step: *build-step
