@@ -42,8 +42,8 @@ public class LoginPage
     public static By byButton = By.tagName("button");
     public static By bySpan = By.tagName("span");
     public static By byGotItButton = By.className("cc-btn");
-    public static By byButtonScroll = By.xpath("//a[text()='Discuss on Helpdesks']");
-    public static By bySelector = By.className("pickListSelect");
+    public static By byButtonScroll = By.xpath("//a[text()='Disclaimer']");//updated xpath previous xpath was changed on the website
+    public static By bySelector = By.xpath("//select[@class=\"form-control gds-cr\"]");
     public static By byAdd = By.className("pAdds");
 
     public void enterUserDetails(String userMail, String pwd) {
@@ -139,7 +139,7 @@ public class LoginPage
     {
         MainCall.genericFunctions.selectElementFromDropDownByText(bySelector,value1);
         MainCall.genericFunctions.selectElementFromDropDownByText(bySelector,value2);
-        MainCall.genericFunctions.click(byAdd);
+
     }
 
     //Example DB Integration From jar

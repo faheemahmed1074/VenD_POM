@@ -45,7 +45,8 @@
                 <mirror>
                     <id>internal-artifactory</id>
                     <name>VD Internal Repo</name>
-                    <url>http://52.86.153.55:8081/artifactory/vend-libs-local/qa</url>
+<!--                    <url>http://52.86.153.55:8081/artifactory/vend-libs-local/qa</url>-->
+                    <url>http://vend-user:Vend123456@52.86.153.55:8081/artifactory/vend-libs-local/qa</url>   <!--URL updated because in POM.xml have this url and it was causing issues due to mismatch-->
                     <mirrorOf>*</mirrorOf>
                     <layout>default</layout>
                     <snapshots>

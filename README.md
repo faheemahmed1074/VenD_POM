@@ -95,7 +95,14 @@ ___
     - git checkout origin/yourbranchname
 
 ___
-#
+
+
+###### How to execute the framework:
+- Go to web-automation-framework/testng.xml 
+- Right click on the file
+- Click on Run testng.xml 
+- Or you can write this command on terminal : mvn test
+
 ###### Application Configuration File setup:
 - Test Trail Integration: set LogTestRail = true  
 - jira Integration: set LogJIRA = true
@@ -157,9 +164,9 @@ Note**: Restart the PC if the framework is not able to detect updated system var
 
 3- all classes i.e base class (hooks), main class etc are in _src/main/java/general_
 
-4- db connection class define in _src/main/java/dbConnection_
+4- db connection class define in package _com.venturedive:testrail-integration:10.3-SNAPSHOT/database.connection
 
-5- all application configuration are in _src/main/java/config_
+5- all application configuration are in _src/main/resources
 
 ###### DataBase Connection
 
@@ -184,6 +191,22 @@ dbPort =
 5- use **dbconn.getResult(String query)** for select query return the resultSet
 
 6- use **dbconn.executeQuery(String query)** for update query , delete and insert query
+
+**13- Troubleshooting
+- If you are facing errors while resolving the dependencies errors then perform the following steps
+- Make sure you have the updated Setting.xml file, and you need to paste it in the .m2 folder present in the C:\User\User_name
+- Make sure you have the same version of java and maven mentioned in the Readme file
+- If you are unsure about the Java Version, you can click on the Project Structure -> Check the SDK version
+- ![img_2.png](img_2.png)
+- If you are unable to find the .m2 folder, you can unhide it from properties
+- Try to reload the maven project
+- If Still the issue is unresolved then go settings, click on Build, Execution -> Click on Maven -> Select the path where maven is installed
+- ![img_3.png](img_3.png)
+- Also in the menu bar click on File -> Click on Invalidate Cache -> Check All the option -> Click on Invalidate Cache and Restart
+- ![img_4.png](img_4.png)
+- Perform the Invalidate Cache step two or three times, it will resolve all the Dependencies problem.
+
+
 
 
 

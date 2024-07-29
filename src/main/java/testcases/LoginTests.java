@@ -42,9 +42,9 @@ public class LoginTests extends BaseTest {
     }
     @Test (description = "224710")
     public static void ListBoxDemo() throws InterruptedException {
-        MainCall.genericFunctions.driverStart("https://www.seleniumeasy.com/test/jquery-dual-list-box-demo.html");
+        MainCall.genericFunctions.driverStart("https://www.geodatasource.com/software/country-region-dropdown-menu-demo");
         MainCall.webDriverWaits.sleep(2000);
-        MainCall.loginPage.selectValues("Alice","Isis");
+        MainCall.loginPage.selectValues("Aruba","Pakistan");
         MainCall.webDriverWaits.sleep(2000);
         MainCall.genericFunctions.PercyCapture("ListBox");
     }
