@@ -8,7 +8,7 @@ public class TrainingSessionPage {
     public static By byRange =By.xpath("//a[@class=\"ui-slider-handle ui-state-default ui-corner-all\"]");
     public static By bySuccess = By.id("rangeSuccess");
     public static By byPromptAlertButton = By.className("analystic");
-    public static By AlertWithTextbox = By.xpath("/html/body/div[1]/div/div/div/div[1]/ul/li[3]/a");
+    public static By AlertWithTextbox = By.xpath("//a[@href=\"#Textbox\"]");
     public static By buttontoDemoPromopt = By.xpath("//*[@id=\"Textbox\"]/button");
 
     public static By byFirstName = By.xpath("//*[@placeholder=\"First Name\"]");
