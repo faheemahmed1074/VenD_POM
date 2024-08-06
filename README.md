@@ -95,7 +95,15 @@ ___
     - git checkout origin/yourbranchname
 
 ___
-#
+
+
+###### How to execute the framework:
+- Go to web-automation-framework/testng.xml 
+- Right click on the file
+- Click on Run testng.xml 
+- Or you can write this command on terminal : mvn test
+- if you are facing any problem in resolving dependencies please check the wiki page in the repo
+
 ###### Application Configuration File setup:
 - Test Trail Integration: set LogTestRail = true  
 - jira Integration: set LogJIRA = true
@@ -157,9 +165,9 @@ Note**: Restart the PC if the framework is not able to detect updated system var
 
 3- all classes i.e base class (hooks), main class etc are in _src/main/java/general_
 
-4- db connection class define in _src/main/java/dbConnection_
+4- db connection class define in package _com.venturedive:testrail-integration:10.3-SNAPSHOT/database.connection
 
-5- all application configuration are in _src/main/java/config_
+5- all application configuration are in _src/main/resources
 
 ###### DataBase Connection
 
@@ -184,6 +192,5 @@ dbPort =
 5- use **dbconn.getResult(String query)** for select query return the resultSet
 
 6- use **dbconn.executeQuery(String query)** for update query , delete and insert query
-
 
 

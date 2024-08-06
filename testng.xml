@@ -8,16 +8,16 @@
             <class name="testcases.LoginTests">
                     <methods>
                         <include name="loginIntoApplication"></include>
-<!--                        <include name="Scrolling"></include>-->
-<!--                        <include name="ListBoxDemo"></include>-->
+                        <include name="Scrolling"></include>
+                        <include name="ListBoxDemo"></include>
                     </methods>
             </class>
             <class name="testcases.TrainingSession">
                 <methods>
                     <include name="AlertWindow"></include>
-<!--                    <include name="Slider"></include>-->
-<!--                    <include name="JavaScriptAlert"></include>-->
-<!--                    <include name="InputForm"></include>-->
+                    <include name="Slider"></include>
+                    <include name="JavaScriptAlert"></include>
+                    <include name="InputForm"></include>
                 </methods>
             </class>
 
