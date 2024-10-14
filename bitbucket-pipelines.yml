@@ -8,7 +8,13 @@ definitions:
           - maven
           - sonar
         script:
-          - mvn verify sonar:sonar -Dsonar.projectKey=venturedive_web-automation-framework_AYiQmTCmS_rGk7Q7_W6_
+          - COMMIT_ID=$(git rev-parse --short HEAD)
+          - mvn verify sonar:sonar
+            -Drevision=${COMMIT_ID}
+            -Dsonar.projectKey=venturedive_web-automation-framework_AYiQmTCmS_rGk7Q7_W6_
+            -Dsonar.host.url=${SONAR_HOST_URL}
+            -Dsonar.token=${SONAR_TOKEN}
+            -Dsonar.projectVersion=${COMMIT_ID}
   caches:
     sonar: ~/.sonar
 
